@@ -1,28 +1,19 @@
 "use client";
 
+import HeroModel3D from "./HeroModel3D";
+
 /**
  * HeroModelPlaceholder
  *
- * Dedicated invisible container reserved for the future AeroMESH 3D model
- * (GLTF / GLB / Three.js Canvas / React Three Fiber / Transparent Render).
- *
- * Layout coordinates:
- * - Positioned on the right side of the hero (48% - 55% width on desktop)
- * - Above the HeroBackground (z-0), below text/modals/nav (z-20/z-50)
- * - Zero borders, zero placeholder text, completely invisible until populated
+ * Cleanly replaced with the real AeroMESH 3D cluster model:
+ * - Positioned on the right side of the hero (48%–52% desktop width)
+ * - Vertically centered
+ * - Preserves generous negative space around headline & CTAs
+ * - Transparent WebGL canvas blending with background network streams
+ * - Idle floating & breathing animation
+ * - 4–6 degree mouse cursor parallax
+ * - Smooth scroll-driven exit
  */
 export default function HeroModelPlaceholder() {
-  return (
-    <div
-      id="aeromesh-hero-model"
-      className="pointer-events-none select-none z-10 w-full lg:w-[52%] xl:w-[55%] h-[340px] sm:h-[420px] lg:h-full lg:absolute lg:right-0 lg:top-0 flex items-center justify-center overflow-visible"
-      aria-hidden="true"
-    >
-      {/* 
-        This container is deliberately empty.
-        Replace this component or inject your Three.js / R3F Canvas here when ready:
-        <Canvas> ... </Canvas> or <AeroMesh3DModel />
-      */}
-    </div>
-  );
+  return <HeroModel3D />;
 }

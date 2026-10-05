@@ -120,10 +120,10 @@ html.light .text-cyan-glow {
 html.dark .cursor-spotlight-layer {
   background: radial-gradient(
     135px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(255, 255, 255, 0.38) 0%,
-    rgba(224, 242, 254, 0.25) 30%,
-    rgba(34, 211, 238, 0.16) 55%,
-    rgba(56, 189, 248, 0.06) 80%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(224, 242, 254, 0.12) 30%,
+    rgba(34, 211, 238, 0.08) 55%,
+    rgba(56, 189, 248, 0.03) 80%,
     transparent 100%
   );
   mix-blend-mode: screen;

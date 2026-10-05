@@ -31,7 +31,7 @@ export default function FeaturesSection() {
     <section
       ref={containerRef}
       id="features"
-      className="relative w-full min-h-[42vh] sm:min-h-[50vh] flex flex-col items-center justify-center select-none overflow-hidden transition-colors duration-300 px-4 sm:px-6 z-10"
+      className="relative w-full py-12 sm:py-16 flex flex-col items-center justify-center select-none overflow-hidden transition-colors duration-300 px-4 sm:px-6 z-10"
       aria-label="AeroMESH Features Overview"
     >
       {/* Ambient background grid lines - ultra subtle */}

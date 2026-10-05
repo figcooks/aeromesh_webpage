@@ -5,6 +5,8 @@ import Hero from "../components/Hero";
 import FeaturesSection from "../components/FeaturesSection";
 import ComparisonSection from "../components/ComparisonSection";
 import PipelineSection from "../components/PipelineSection";
+import Section04MeshCluster from "../components/Section04MeshCluster";
+import Section05ModelStaysHome from "../components/Section05ModelStaysHome";
 import CursorLight from "../components/CursorLight";
 import { ThemeProvider } from "../components/ThemeContext";
 
@@ -29,6 +31,12 @@ export default function Home() {
 
         {/* SECTION 3: “THE FLOATING INFERENCE PIPELINE” (Coordinator ➔ Activation Tunnel ➔ Worker ➔ Token Stream) */}
         <PipelineSection />
+
+        {/* SECTION 4: “ONE SYSTEM. MANY NODES.” (Mesh Status Panel ➔ Node Topology ➔ Scale Your Inference) */}
+        <Section04MeshCluster />
+
+        {/* SECTION 5: “THE MODEL STAYS HOME” (Zero-Weight Transfer Architecture & Privacy by Design) */}
+        <Section05ModelStaysHome />
       </main>
     </ThemeProvider>
   );

@@ -3,6 +3,7 @@
 import React from "react";
 import { Lock, Shield, Database } from "lucide-react";
 import IsometricDataCube from "./IsometricDataCube";
+import { useTheme } from "./ThemeContext";
 
 /**
  * Section05ModelStaysHome
@@ -19,12 +20,18 @@ import IsometricDataCube from "./IsometricDataCube";
  *   - Feature 01: MODEL WEIGHTS / NEVER LEAVE YOUR NODE
  *   - Feature 02: ONLY ACTIVATIONS MOVE / MINIMAL DATA TRANSFER
  *   - Feature 03: KEEP FULL CONTROL / RUN MODELS ON YOUR HARDWARE
+ * - Full light mode and dark mode theme responsiveness
  */
 export default function Section05ModelStaysHome() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <section
       id="section-05-privacy"
-      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 bg-[#060B14] transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden"
+      className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
+        isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
+      } transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden`}
       aria-label="Section 05: The Model Stays Home"
     >
       {/* Background Technical Grid and Ambient Perspective Floor */}
@@ -88,22 +95,44 @@ export default function Section05ModelStaysHome() {
         <div className="flex flex-col items-start text-left">
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2.5 mb-3">
-            <span className="px-2 py-0.5 rounded border border-cyan-400/80 bg-cyan-950/40 text-cyan-300 font-mono text-[11px] font-bold tracking-wider shadow-[0_0_10px_rgba(34,211,238,0.25)]">
+            <span
+              className={`px-2 py-0.5 rounded border font-mono text-[11px] font-bold tracking-wider ${
+                isDark
+                  ? "border-cyan-400/80 bg-cyan-950/40 text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.25)]"
+                  : "border-sky-400 bg-sky-50 text-sky-700 shadow-xs"
+              }`}
+            >
               05
             </span>
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-cyan-300 uppercase">
+            <span
+              className={`text-xs font-mono font-bold tracking-[0.2em] uppercase ${
+                isDark ? "text-cyan-300" : "text-sky-700"
+              }`}
+            >
               THE MODEL STAYS HOME
             </span>
           </div>
 
           {/* Main Heading (Two-tone) */}
           <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-black tracking-tight uppercase leading-[1.1] max-w-4xl">
-            <span className="text-white block">THE MODEL STAYS HOME.</span>
-            <span className="text-cyan-400 text-cyan-glow block mt-1">THE THINKING MOVES.</span>
+            <span className={`block ${isDark ? "text-white" : "text-slate-900"}`}>
+              THE MODEL STAYS HOME.
+            </span>
+            <span
+              className={`block mt-1 ${
+                isDark ? "text-cyan-400 text-cyan-glow" : "text-sky-600 font-black"
+              }`}
+            >
+              THE THINKING MOVES.
+            </span>
           </h2>
 
           {/* Subheading */}
-          <p className="text-xs sm:text-sm text-[#93A4C3] max-w-2xl mt-2 font-normal">
+          <p
+            className={`text-xs sm:text-sm max-w-2xl mt-2 font-normal ${
+              isDark ? "text-[#93A4C3]" : "text-slate-600"
+            }`}
+          >
             Every node keeps its model locally. AeroMESH moves activations, not weights.
           </p>
         </div>
@@ -119,36 +148,76 @@ export default function Section05ModelStaysHome() {
             {/* -------------------------------------------------- */}
             {/* NODE A (COORDINATOR) */}
             {/* -------------------------------------------------- */}
-            <div className="w-full sm:w-[190px] md:w-[200px] shrink-0 rounded-xl border border-cyan-500/40 bg-[#0B1528]/95 backdrop-blur-xl p-4 flex flex-col items-center justify-between gap-3 shadow-[0_0_20px_rgba(34,211,238,0.12)]">
+            <div
+              className={`w-full sm:w-[190px] md:w-[200px] shrink-0 rounded-xl border backdrop-blur-xl p-4 flex flex-col items-center justify-between gap-3 transition-colors duration-200 ${
+                isDark
+                  ? "border-cyan-500/40 bg-[#0B1528]/95 shadow-[0_0_20px_rgba(34,211,238,0.12)] text-white"
+                  : "border-cyan-500/40 bg-white/95 shadow-lg text-slate-900"
+              }`}
+            >
               {/* Node Title & Role */}
               <div className="text-center">
-                <div className="text-xs sm:text-sm font-mono font-bold text-white tracking-wider">
+                <div
+                  className={`text-xs sm:text-sm font-mono font-bold tracking-wider ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}
+                >
                   NODE A
                 </div>
-                <div className="text-[11px] font-mono text-cyan-400 font-semibold tracking-wider uppercase mt-0.5">
+                <div
+                  className={`text-[11px] font-mono font-semibold tracking-wider uppercase mt-0.5 ${
+                    isDark ? "text-cyan-400" : "text-sky-600"
+                  }`}
+                >
                   COORDINATOR
                 </div>
               </div>
 
               {/* Model Weights Representation */}
-              <div className="w-full flex flex-col items-center bg-[#070D18] border border-cyan-500/25 rounded-lg p-3">
+              <div
+                className={`w-full flex flex-col items-center rounded-lg p-3 border ${
+                  isDark
+                    ? "bg-[#070D18] border-cyan-500/25"
+                    : "bg-slate-50 border-cyan-500/20"
+                }`}
+              >
                 {/* MODEL.GGUF Tag */}
-                <div className="px-2.5 py-0.5 rounded border border-cyan-500/40 bg-cyan-950/50 text-[10px] sm:text-[11px] font-mono font-semibold text-cyan-300">
+                <div
+                  className={`px-2.5 py-0.5 rounded border text-[10px] sm:text-[11px] font-mono font-semibold ${
+                    isDark
+                      ? "border-cyan-500/40 bg-cyan-950/50 text-cyan-300"
+                      : "border-sky-300 bg-sky-100 text-sky-800"
+                  }`}
+                >
                   MODEL.GGUF
                 </div>
 
                 {/* Stacked Model Weight Bars */}
                 <div className="w-full mt-3 flex flex-col gap-1.5 px-1">
-                  {/* Top Bar (Darker Cyan/Navy) */}
-                  <div className="h-3 w-full rounded-sm bg-cyan-800/60 border border-cyan-700/50" />
+                  {/* Top Bar */}
+                  <div
+                    className={`h-3 w-full rounded-sm border ${
+                      isDark
+                        ? "bg-cyan-800/60 border-cyan-700/50"
+                        : "bg-slate-300 border-slate-400/50"
+                    }`}
+                  />
                   {/* Bottom Bar (Electric Bright Cyan with subtle glow) */}
                   <div className="h-3.5 w-full rounded-sm bg-gradient-to-r from-cyan-400 to-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.5)]" />
                 </div>
 
                 {/* Lock Indicator */}
-                <div className="flex items-center gap-1.5 mt-3 pt-2 border-t border-cyan-500/20 w-full justify-center">
-                  <Lock className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider">
+                <div
+                  className={`flex items-center gap-1.5 mt-3 pt-2 border-t w-full justify-center ${
+                    isDark ? "border-cyan-500/20" : "border-slate-200"
+                  }`}
+                >
+                  <Lock className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-cyan-400" : "text-sky-600"
+                    }`}
+                  >
                     LOCAL
                   </span>
                 </div>
@@ -161,13 +230,25 @@ export default function Section05ModelStaysHome() {
             <div className="flex-1 w-full flex flex-col items-center justify-center px-1 py-4 md:py-0 relative">
               {/* Activation Metric Label */}
               <div className="text-center mb-3">
-                <span className="text-[11px] font-mono text-slate-300 uppercase tracking-wider font-semibold block">
+                <span
+                  className={`text-[11px] font-mono uppercase tracking-wider font-semibold block ${
+                    isDark ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
                   ACTIVATION
                 </span>
-                <span className="text-xl sm:text-2xl font-mono font-black text-cyan-400 text-cyan-glow tracking-tight block">
+                <span
+                  className={`text-xl sm:text-2xl font-mono font-black tracking-tight block ${
+                    isDark ? "text-cyan-400 text-cyan-glow" : "text-sky-600"
+                  }`}
+                >
                   ~ 5.1 KB
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 block">
+                <span
+                  className={`text-[10px] font-mono block ${
+                    isDark ? "text-slate-400" : "text-slate-500 font-medium"
+                  }`}
+                >
                   Per token
                 </span>
               </div>
@@ -231,7 +312,7 @@ export default function Section05ModelStaysHome() {
                   </circle>
                 </svg>
 
-                {/* 5 Isometric 3D Cyan Data Cubes Spaced Along the Line (As in Reference) */}
+                {/* 5 Isometric 3D Cyan Data Cubes Spaced Along the Line */}
                 <div className="absolute inset-0 flex items-center justify-between px-2 sm:px-6 pointer-events-none">
                   {/* Cube 1: Diamond Packet */}
                   <div className="transform -translate-y-0.5">
@@ -264,36 +345,76 @@ export default function Section05ModelStaysHome() {
             {/* -------------------------------------------------- */}
             {/* NODE B (WORKER) */}
             {/* -------------------------------------------------- */}
-            <div className="w-full sm:w-[190px] md:w-[200px] shrink-0 rounded-xl border border-cyan-500/40 bg-[#0B1528]/95 backdrop-blur-xl p-4 flex flex-col items-center justify-between gap-3 shadow-[0_0_20px_rgba(34,211,238,0.12)]">
+            <div
+              className={`w-full sm:w-[190px] md:w-[200px] shrink-0 rounded-xl border backdrop-blur-xl p-4 flex flex-col items-center justify-between gap-3 transition-colors duration-200 ${
+                isDark
+                  ? "border-cyan-500/40 bg-[#0B1528]/95 shadow-[0_0_20px_rgba(34,211,238,0.12)] text-white"
+                  : "border-cyan-500/40 bg-white/95 shadow-lg text-slate-900"
+              }`}
+            >
               {/* Node Title & Role */}
               <div className="text-center">
-                <div className="text-xs sm:text-sm font-mono font-bold text-white tracking-wider">
+                <div
+                  className={`text-xs sm:text-sm font-mono font-bold tracking-wider ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}
+                >
                   NODE B
                 </div>
-                <div className="text-[11px] font-mono text-cyan-400 font-semibold tracking-wider uppercase mt-0.5">
+                <div
+                  className={`text-[11px] font-mono font-semibold tracking-wider uppercase mt-0.5 ${
+                    isDark ? "text-cyan-400" : "text-sky-600"
+                  }`}
+                >
                   WORKER
                 </div>
               </div>
 
               {/* Model Weights Representation */}
-              <div className="w-full flex flex-col items-center bg-[#070D18] border border-cyan-500/25 rounded-lg p-3">
+              <div
+                className={`w-full flex flex-col items-center rounded-lg p-3 border ${
+                  isDark
+                    ? "bg-[#070D18] border-cyan-500/25"
+                    : "bg-slate-50 border-cyan-500/20"
+                }`}
+              >
                 {/* MODEL.GGUF Tag */}
-                <div className="px-2.5 py-0.5 rounded border border-cyan-500/40 bg-cyan-950/50 text-[10px] sm:text-[11px] font-mono font-semibold text-cyan-300">
+                <div
+                  className={`px-2.5 py-0.5 rounded border text-[10px] sm:text-[11px] font-mono font-semibold ${
+                    isDark
+                      ? "border-cyan-500/40 bg-cyan-950/50 text-cyan-300"
+                      : "border-sky-300 bg-sky-100 text-sky-800"
+                  }`}
+                >
                   MODEL.GGUF
                 </div>
 
                 {/* Stacked Model Weight Bars */}
                 <div className="w-full mt-3 flex flex-col gap-1.5 px-1">
-                  {/* Top Bar (Darker Cyan/Navy) */}
-                  <div className="h-3 w-full rounded-sm bg-cyan-800/60 border border-cyan-700/50" />
+                  {/* Top Bar */}
+                  <div
+                    className={`h-3 w-full rounded-sm border ${
+                      isDark
+                        ? "bg-cyan-800/60 border-cyan-700/50"
+                        : "bg-slate-300 border-slate-400/50"
+                    }`}
+                  />
                   {/* Bottom Bar (Electric Bright Cyan with subtle glow) */}
                   <div className="h-3.5 w-full rounded-sm bg-gradient-to-r from-cyan-400 to-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.5)]" />
                 </div>
 
                 {/* Lock Indicator */}
-                <div className="flex items-center gap-1.5 mt-3 pt-2 border-t border-cyan-500/20 w-full justify-center">
-                  <Lock className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider">
+                <div
+                  className={`flex items-center gap-1.5 mt-3 pt-2 border-t w-full justify-center ${
+                    isDark ? "border-cyan-500/20" : "border-slate-200"
+                  }`}
+                >
+                  <Lock className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-cyan-400" : "text-sky-600"
+                    }`}
+                  >
                     LOCAL
                   </span>
                 </div>
@@ -304,13 +425,27 @@ export default function Section05ModelStaysHome() {
           {/* ==================================================== */}
           {/* RIGHT COLUMN: PRIVACY BY DESIGN PANEL (Col span 4)  */}
           {/* ==================================================== */}
-          <div className="lg:col-span-4 flex flex-col justify-center lg:pl-8 lg:border-l lg:border-cyan-500/30 pt-6 lg:pt-0 border-t border-cyan-500/20 lg:border-t-0">
+          <div
+            className={`lg:col-span-4 flex flex-col justify-center lg:pl-8 lg:border-l pt-6 lg:pt-0 border-t lg:border-t-0 ${
+              isDark
+                ? "lg:border-cyan-500/30 border-cyan-500/20"
+                : "lg:border-slate-200 border-slate-200"
+            }`}
+          >
             {/* Eyebrow with crosshair */}
             <div className="flex items-center gap-2 mb-6">
-              <span className="text-cyan-400 font-mono text-xs font-bold tracking-wider">
+              <span
+                className={`font-mono text-xs font-bold tracking-wider ${
+                  isDark ? "text-cyan-400" : "text-sky-600"
+                }`}
+              >
                 +--
               </span>
-              <span className="text-xs font-mono font-bold tracking-[0.2em] text-cyan-300 uppercase">
+              <span
+                className={`text-xs font-mono font-bold tracking-[0.2em] uppercase ${
+                  isDark ? "text-cyan-300" : "text-sky-700"
+                }`}
+              >
                 PRIVACY BY DESIGN
               </span>
             </div>
@@ -319,14 +454,28 @@ export default function Section05ModelStaysHome() {
             <div className="flex flex-col gap-6">
               {/* Feature 01: MODEL WEIGHTS NEVER LEAVE YOUR NODE */}
               <div className="group flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] transition-all">
-                  <Lock className="w-5 h-5 text-cyan-400" />
+                <div
+                  className={`w-11 h-11 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Lock className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs sm:text-sm font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs sm:text-sm font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     MODEL WEIGHTS
                   </span>
-                  <span className="text-[11px] sm:text-xs font-mono text-[#93A4C3] uppercase tracking-wide mt-0.5">
+                  <span
+                    className={`text-[11px] sm:text-xs font-mono uppercase tracking-wide mt-0.5 ${
+                      isDark ? "text-[#93A4C3]" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     NEVER LEAVE YOUR NODE
                   </span>
                 </div>
@@ -334,14 +483,28 @@ export default function Section05ModelStaysHome() {
 
               {/* Feature 02: ONLY ACTIVATIONS MOVE MINIMAL DATA TRANSFER */}
               <div className="group flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] transition-all">
-                  <Shield className="w-5 h-5 text-cyan-400" />
+                <div
+                  className={`w-11 h-11 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Shield className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs sm:text-sm font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs sm:text-sm font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     ONLY ACTIVATIONS MOVE
                   </span>
-                  <span className="text-[11px] sm:text-xs font-mono text-[#93A4C3] uppercase tracking-wide mt-0.5">
+                  <span
+                    className={`text-[11px] sm:text-xs font-mono uppercase tracking-wide mt-0.5 ${
+                      isDark ? "text-[#93A4C3]" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     MINIMAL DATA TRANSFER
                   </span>
                 </div>
@@ -349,14 +512,28 @@ export default function Section05ModelStaysHome() {
 
               {/* Feature 03: KEEP FULL CONTROL RUN MODELS ON YOUR HARDWARE */}
               <div className="group flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] transition-all">
-                  <Database className="w-5 h-5 text-cyan-400" />
+                <div
+                  className={`w-11 h-11 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Database className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs sm:text-sm font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs sm:text-sm font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     KEEP FULL CONTROL
                   </span>
-                  <span className="text-[11px] sm:text-xs font-mono text-[#93A4C3] uppercase tracking-wide mt-0.5">
+                  <span
+                    className={`text-[11px] sm:text-xs font-mono uppercase tracking-wide mt-0.5 ${
+                      isDark ? "text-[#93A4C3]" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     RUN MODELS ON YOUR HARDWARE
                   </span>
                 </div>

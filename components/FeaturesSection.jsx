@@ -63,20 +63,51 @@ export default function FeaturesSection() {
         className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto"
       >
         {/* Subtle Technical Eyebrow */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.24em] text-cyan-300 uppercase font-semibold">
+        <div
+          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border backdrop-blur-md mb-4 ${
+            isDark
+              ? "border-cyan-500/30 bg-cyan-950/40 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+              : "border-sky-300 bg-sky-50 shadow-xs"
+          }`}
+        >
+          <span
+            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+              isDark ? "bg-cyan-400" : "bg-sky-600"
+            }`}
+          />
+          <span
+            className={`text-[10px] sm:text-[11px] font-mono tracking-[0.24em] uppercase font-semibold ${
+              isDark ? "text-cyan-300" : "text-sky-700"
+            }`}
+          >
             ARCHITECTURE & CAPABILITIES
           </span>
         </div>
 
         {/* Minimal Features Headline */}
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase leading-tight">
-          CORE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300 text-cyan-glow">FEATURES</span>
+        <h2
+          className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight uppercase leading-tight ${
+            isDark ? "text-white" : "text-slate-900"
+          }`}
+        >
+          CORE{" "}
+          <span
+            className={`text-transparent bg-clip-text text-cyan-glow ${
+              isDark
+                ? "bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300"
+                : "bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700"
+            }`}
+          >
+            FEATURES
+          </span>
         </h2>
 
         {/* Crisp Subtitle */}
-        <p className="mt-3 text-xs sm:text-sm font-mono tracking-[0.16em] text-slate-400 uppercase max-w-lg">
+        <p
+          className={`mt-3 text-xs sm:text-sm font-mono tracking-[0.16em] uppercase max-w-lg ${
+            isDark ? "text-slate-400" : "text-slate-600 font-medium"
+          }`}
+        >
           Zero Weight Migration · Local Model Persistence · Micro-Activation Sharding
         </p>
 

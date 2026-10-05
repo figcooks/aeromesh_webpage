@@ -105,8 +105,8 @@ html.light .text-cyan-glow {
 
 /* ----------------------------------------------------
    INTERACTIVE CURSOR SPOTLIGHT EFFECT
-   - In DARK MODE: A radial light mode effect wherever cursor hovers
-   - In LIGHT MODE: A radial dark mode effect wherever cursor hovers
+   - In DARK MODE: A luminous radial daylight flashlight effect wherever cursor hovers
+   - In LIGHT MODE: A rich, soft radiant sky-blue & cyan ambient spotlight
    ---------------------------------------------------- */
 .cursor-spotlight-layer {
   opacity: var(--spotlight-opacity, 0);
@@ -119,28 +119,28 @@ html.light .text-cyan-glow {
 .cursor-spotlight-layer.spotlight-dark,
 html.dark .cursor-spotlight-layer {
   background: radial-gradient(
-    135px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(224, 242, 254, 0.12) 30%,
-    rgba(34, 211, 238, 0.08) 55%,
-    rgba(56, 189, 248, 0.03) 80%,
+    200px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(224, 242, 254, 0.14) 25%,
+    rgba(34, 211, 238, 0.1) 50%,
+    rgba(56, 189, 248, 0.04) 75%,
     transparent 100%
   );
   mix-blend-mode: screen;
 }
 
-/* LIGHT MODE: Lightly tinted blue radial cursor effect (zero black, soft sky-blue glow) */
+/* LIGHT MODE: Radiant soft sky-blue & cyan interactive ambient glow */
 .cursor-spotlight-layer.spotlight-light,
 html.light .cursor-spotlight-layer,
 html:not(.dark) .cursor-spotlight-layer {
   background: radial-gradient(
-    130px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(56, 189, 248, 0.28) 0%,
-    rgba(14, 165, 233, 0.18) 35%,
-    rgba(186, 230, 253, 0.1) 65%,
+    260px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(14, 165, 233, 0.25) 0%,
+    rgba(56, 189, 248, 0.16) 35%,
+    rgba(99, 102, 241, 0.08) 65%,
     transparent 100%
   );
-  mix-blend-mode: normal;
+  mix-blend-mode: multiply;
 }
 
 /* Touch & Mobile devices - disabled */

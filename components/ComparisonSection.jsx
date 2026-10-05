@@ -19,7 +19,9 @@ export default function ComparisonSection() {
   return (
     <section
       id="comparison-section"
-      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 bg-[#060B14] transition-colors duration-300 flex flex-col items-center justify-center select-none"
+      className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
+        isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
+      } transition-colors duration-300 flex flex-col items-center justify-center select-none`}
       aria-label="Traditional Distributed Inference vs AeroMESH 0.0 MB Moment"
     >
       {/* Subtle Ambient Background Grid */}
@@ -50,10 +52,18 @@ export default function ComparisonSection() {
               <span>01</span>
               <span>TRADITIONAL APPROACH</span>
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white uppercase leading-tight">
+            <h2
+              className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight uppercase leading-tight ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
               TRADITIONAL DISTRIBUTED INFERENCE
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 font-medium mt-1">
+            <p
+              className={`text-xs sm:text-sm font-medium mt-1 ${
+                isDark ? "text-slate-300" : "text-slate-600"
+              }`}
+            >
               The entire model weights have to be transferred across the network.
             </p>
           </div>
@@ -64,10 +74,18 @@ export default function ComparisonSection() {
               <span>02</span>
               <span>AEROMESH APPROACH</span>
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white uppercase leading-tight text-cyan-glow">
+            <h2
+              className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight uppercase leading-tight text-cyan-glow ${
+                isDark ? "text-white" : "text-sky-900"
+              }`}
+            >
               AEROMESH
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 font-medium mt-1">
+            <p
+              className={`text-xs sm:text-sm font-medium mt-1 ${
+                isDark ? "text-slate-300" : "text-slate-600"
+              }`}
+            >
               Each node keeps the model locally. Only micro-activations are transferred.
             </p>
           </div>
@@ -78,13 +96,29 @@ export default function ComparisonSection() {
           {/* ---------------------------------------------------- */}
           {/* LEFT COLUMN: TRADITIONAL DISTRIBUTED INFERENCE */}
           {/* ---------------------------------------------------- */}
-          <div className="flex flex-col justify-between bg-[#0A101F] border border-red-500/40 rounded-2xl p-6 sm:p-7 backdrop-blur-xl relative shadow-[0_20px_50px_rgba(0,0,0,0.7)] gap-6">
+          <div
+            className={`flex flex-col justify-between border border-red-500/40 rounded-2xl p-6 sm:p-7 backdrop-blur-xl relative gap-6 ${
+              isDark
+                ? "bg-[#0A101F] text-white shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
+                : "bg-white text-slate-900 shadow-xl border-red-200"
+            }`}
+          >
             {/* Node A (Sender) */}
             <div>
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div
+                className={`flex items-center justify-between pb-3 border-b ${
+                  isDark ? "border-white/10" : "border-slate-200"
+                }`}
+              >
                 <div className="flex items-center gap-2.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22D3EE]" />
-                  <span className="text-sm font-mono font-bold text-white tracking-wider">NODE A</span>
+                  <span
+                    className={`text-sm font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
+                    NODE A
+                  </span>
                   <span className="text-xs font-mono text-slate-400 hidden sm:inline">RTX 3050 · 16 GB · Windows</span>
                 </div>
                 <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-white/10 text-white font-bold border border-white/15">
@@ -161,13 +195,29 @@ export default function ComparisonSection() {
           {/* ---------------------------------------------------- */}
           {/* RIGHT COLUMN: AEROMESH APPROACH (0.0 MB) */}
           {/* ---------------------------------------------------- */}
-          <div className="flex flex-col justify-between bg-[#0A101F] border border-cyan-400/60 rounded-2xl p-6 sm:p-7 backdrop-blur-xl relative shadow-[0_20px_50px_rgba(34,211,238,0.18)] gap-6">
+          <div
+            className={`flex flex-col justify-between border border-cyan-400/60 rounded-2xl p-6 sm:p-7 backdrop-blur-xl relative gap-6 ${
+              isDark
+                ? "bg-[#0A101F] text-white shadow-[0_20px_50px_rgba(34,211,238,0.18)]"
+                : "bg-white text-slate-900 shadow-xl border-cyan-300"
+            }`}
+          >
             {/* Node A (Coordinator) */}
             <div>
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div
+                className={`flex items-center justify-between pb-3 border-b ${
+                  isDark ? "border-white/10" : "border-slate-200"
+                }`}
+              >
                 <div className="flex items-center gap-2.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22D3EE]" />
-                  <span className="text-sm font-mono font-bold text-white tracking-wider">NODE A</span>
+                  <span
+                    className={`text-sm font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
+                    NODE A
+                  </span>
                   <span className="text-xs font-mono text-slate-400 hidden sm:inline">RTX 3050 · 16 GB · Windows</span>
                 </div>
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-0.5 rounded-full bg-cyan-950/90 border border-cyan-400/70 text-cyan-200 font-bold shadow-[0_0_12px_rgba(34,211,238,0.3)]">
@@ -229,10 +279,20 @@ export default function ComparisonSection() {
                 ))}
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-white/10">
+              <div
+                className={`flex items-center justify-between pt-3 border-t ${
+                  isDark ? "border-white/10" : "border-slate-200"
+                }`}
+              >
                 <div className="flex items-center gap-2.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22D3EE]" />
-                  <span className="text-sm font-mono font-bold text-white tracking-wider">NODE B</span>
+                  <span
+                    className={`text-sm font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
+                    NODE B
+                  </span>
                   <span className="text-xs font-mono text-slate-400 hidden sm:inline">RTX 4060 · 16 GB · Linux</span>
                 </div>
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-0.5 rounded-full bg-cyan-950/90 border border-cyan-400/70 text-cyan-200 font-bold shadow-[0_0_12px_rgba(34,211,238,0.3)]">
@@ -246,11 +306,19 @@ export default function ComparisonSection() {
             </div>
 
             {/* Bottom Metric: 0.0 MB MOMENT */}
-            <div className="p-4 rounded-xl border border-cyan-400/80 bg-cyan-950/60 text-center shadow-[0_0_35px_rgba(34,211,238,0.4)]">
-              <div className="text-4xl sm:text-5xl font-black font-mono text-cyan-300 tracking-tight leading-none text-cyan-glow">
+            <div
+              className={`p-4 rounded-xl border border-cyan-400/80 text-center shadow-[0_0_35px_rgba(34,211,238,0.4)] ${
+                isDark ? "bg-cyan-950/60" : "bg-cyan-50/90"
+              }`}
+            >
+              <div className="text-4xl sm:text-5xl font-black font-mono text-cyan-500 tracking-tight leading-none text-cyan-glow">
                 0.0 MB
               </div>
-              <div className="text-xs font-mono tracking-[0.22em] text-cyan-100 uppercase font-black mt-1">
+              <div
+                className={`text-xs font-mono tracking-[0.22em] uppercase font-black mt-1 ${
+                  isDark ? "text-cyan-200" : "text-sky-800"
+                }`}
+              >
                 MODEL WEIGHTS TRANSFERRED
               </div>
             </div>
@@ -261,27 +329,59 @@ export default function ComparisonSection() {
         {/* THE 0.0 MB MONUMENTAL BREAKTHROUGH CARD */}
         {/* Clean, neat, fully visible in-flow container */}
         {/* ---------------------------------------------------- */}
-        <div className="w-full max-w-4xl mx-auto rounded-2xl border border-cyan-400/60 bg-[#0A101F]/90 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(34,211,238,0.25)] flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 mb-2 text-xs font-mono tracking-[0.26em] text-cyan-300 uppercase font-bold">
+        <div
+          className={`w-full max-w-4xl mx-auto rounded-2xl border backdrop-blur-2xl p-6 sm:p-8 flex flex-col items-center text-center transition-all duration-300 ${
+            isDark
+              ? "border-cyan-400/60 bg-[#0A101F]/90 shadow-[0_0_50px_rgba(34,211,238,0.25)] text-white"
+              : "border-cyan-500/40 bg-white/95 shadow-2xl shadow-cyan-500/10 text-slate-900"
+          }`}
+        >
+          <div
+            className={`inline-flex items-center gap-2 mb-2 text-xs font-mono tracking-[0.26em] uppercase font-bold ${
+              isDark ? "text-cyan-300" : "text-sky-700"
+            }`}
+          >
             <span className="w-6 h-[1px] bg-cyan-400/80 inline-block" />
             <span>THE AEROMESH BREAKTHROUGH</span>
             <span className="w-6 h-[1px] bg-cyan-400/80 inline-block" />
           </div>
 
-          <h3 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-200 to-cyan-400 text-cyan-glow leading-none">
+          <h3
+            className={`text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-transparent bg-clip-text leading-none text-cyan-glow ${
+              isDark
+                ? "bg-gradient-to-b from-white via-cyan-200 to-cyan-400"
+                : "bg-gradient-to-b from-sky-600 via-cyan-600 to-blue-700"
+            }`}
+          >
             0.0 MB
           </h3>
 
-          <p className="mt-2 text-sm sm:text-lg font-mono tracking-[0.22em] text-slate-100 uppercase font-black">
+          <p
+            className={`mt-2 text-sm sm:text-lg font-mono tracking-[0.22em] uppercase font-black ${
+              isDark ? "text-slate-100" : "text-slate-800"
+            }`}
+          >
             MODEL WEIGHTS TRANSFERRED
           </p>
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
-            <span className="px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/50 font-bold text-slate-200">
+            <span
+              className={`px-4 py-1.5 rounded-full border font-bold ${
+                isDark
+                  ? "bg-cyan-950/80 border-cyan-500/50 text-slate-200"
+                  : "bg-slate-100 border-slate-300 text-slate-700 shadow-xs"
+              }`}
+            >
               MODEL STAYS LOCAL
             </span>
             <span className="text-cyan-400 font-bold text-base">→</span>
-            <span className="px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-400/70 text-cyan-200 font-black shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+            <span
+              className={`px-4 py-1.5 rounded-full border font-black ${
+                isDark
+                  ? "bg-cyan-950/80 border-cyan-400/70 text-cyan-200 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                  : "bg-cyan-50 border-cyan-400 text-sky-800 shadow-xs"
+              }`}
+            >
               ONLY 5.1 KB ACTIVATION MOVES
             </span>
           </div>

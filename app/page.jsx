@@ -8,36 +8,49 @@ import PipelineSection from "../components/PipelineSection";
 import Section04MeshCluster from "../components/Section04MeshCluster";
 import Section05ModelStaysHome from "../components/Section05ModelStaysHome";
 import CursorLight from "../components/CursorLight";
-import { ThemeProvider } from "../components/ThemeContext";
+import { ThemeProvider, useTheme } from "../components/ThemeContext";
+
+function MainContent() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <main
+      className={`relative min-h-screen ${
+        isDark ? "bg-[#060B14] text-slate-100" : "bg-[#F8FAFC] text-slate-900"
+      } flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300`}
+    >
+      {/* Interactive Dual-Mode Page-Wide Cursor Spotlight (fixed across all sections) */}
+      <CursorLight fixed />
+
+      {/* Top Minimal Navigation with Theme Switcher */}
+      <Navbar />
+
+      {/* SECTION 1: Hero Landing Section */}
+      <Hero />
+
+      {/* SECTION 1 ➔ SECTION 2: Minimal Features Heading & Empty Space Transition */}
+      <FeaturesSection />
+
+      {/* SECTION 2: “0.0 MB” MOMENT (Appears from below, 8.0 GB to 5.1 KB & Monumental 0.0 MB Climax) */}
+      <ComparisonSection />
+
+      {/* SECTION 3: “THE FLOATING INFERENCE PIPELINE” (Coordinator ➔ Activation Tunnel ➔ Worker ➔ Token Stream) */}
+      <PipelineSection />
+
+      {/* SECTION 4: “ONE SYSTEM. MANY NODES.” (Mesh Status Panel ➔ Node Topology ➔ Scale Your Inference) */}
+      <Section04MeshCluster />
+
+      {/* SECTION 5: “THE MODEL STAYS HOME” (Zero-Weight Transfer Architecture & Privacy by Design) */}
+      <Section05ModelStaysHome />
+    </main>
+  );
+}
 
 export default function Home() {
   return (
     <ThemeProvider>
-      <main className="relative min-h-screen bg-[#060B14] dark:bg-[#060B14] light:bg-[#F8FAFC] flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
-        {/* Interactive Dual-Mode Page-Wide Cursor Spotlight (fixed across all sections) */}
-        <CursorLight fixed />
-
-        {/* Top Minimal Navigation with Theme Switcher */}
-        <Navbar />
-
-        {/* SECTION 1: Hero Landing Section */}
-        <Hero />
-
-        {/* SECTION 1 ➔ SECTION 2: Minimal Features Heading & Empty Space Transition */}
-        <FeaturesSection />
-
-        {/* SECTION 2: “0.0 MB” MOMENT (Appears from below, 8.0 GB to 5.1 KB & Monumental 0.0 MB Climax) */}
-        <ComparisonSection />
-
-        {/* SECTION 3: “THE FLOATING INFERENCE PIPELINE” (Coordinator ➔ Activation Tunnel ➔ Worker ➔ Token Stream) */}
-        <PipelineSection />
-
-        {/* SECTION 4: “ONE SYSTEM. MANY NODES.” (Mesh Status Panel ➔ Node Topology ➔ Scale Your Inference) */}
-        <Section04MeshCluster />
-
-        {/* SECTION 5: “THE MODEL STAYS HOME” (Zero-Weight Transfer Architecture & Privacy by Design) */}
-        <Section05ModelStaysHome />
-      </main>
+      <MainContent />
     </ThemeProvider>
   );
 }

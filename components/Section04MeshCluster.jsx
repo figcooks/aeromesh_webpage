@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Monitor, Share2, Boxes } from "lucide-react";
 import IsometricDataCube from "./IsometricDataCube";
+import { useTheme } from "./ThemeContext";
 
 /**
  * Section04MeshCluster
@@ -14,8 +15,12 @@ import IsometricDataCube from "./IsometricDataCube";
  * - Center: Distributed Node Topology (Coordinator + Node 01, 02, 03, 04) with curved SVG lines and 3D data cubes.
  * - Right Column: +-- SCALE YOUR INFERENCE, stacked headline, and capability list.
  * - Technical perspective grid floor and border styling.
+ * - Full light mode and dark mode theme responsiveness.
  */
 export default function Section04MeshCluster() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   // Live subtle simulation for dashboard metrics
   const [metrics, setMetrics] = useState({
     nodes: "04",
@@ -41,7 +46,9 @@ export default function Section04MeshCluster() {
   return (
     <section
       id="section-04-cluster"
-      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 bg-[#060B14] transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden"
+      className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
+        isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
+      } transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden`}
       aria-label="Section 04: One System. Many Nodes."
     >
       {/* Background Technical Grid and Ambient Perspective Floor */}
@@ -105,21 +112,39 @@ export default function Section04MeshCluster() {
         <div className="flex flex-col items-start text-left">
           {/* Section badge / eyebrow */}
           <div className="inline-flex items-center gap-2.5 mb-3">
-            <span className="px-2 py-0.5 rounded border border-cyan-400/80 bg-cyan-950/40 text-cyan-300 font-mono text-[11px] font-bold tracking-wider shadow-[0_0_10px_rgba(34,211,238,0.25)]">
+            <span
+              className={`px-2 py-0.5 rounded border font-mono text-[11px] font-bold tracking-wider ${
+                isDark
+                  ? "border-cyan-400/80 bg-cyan-950/40 text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.25)]"
+                  : "border-sky-400 bg-sky-50 text-sky-700 shadow-xs"
+              }`}
+            >
               04
             </span>
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-cyan-300 uppercase">
+            <span
+              className={`text-xs font-mono font-bold tracking-[0.2em] uppercase ${
+                isDark ? "text-cyan-300" : "text-sky-700"
+              }`}
+            >
               ONE SYSTEM. MANY NODES
             </span>
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-black tracking-tight text-white uppercase leading-[1.1] max-w-4xl">
+          <h2
+            className={`text-2xl sm:text-3xl lg:text-[40px] font-black tracking-tight uppercase leading-[1.1] max-w-4xl ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}
+          >
             YOUR HARDWARE BECOMES THE CLUSTER.
           </h2>
 
           {/* Subheading */}
-          <p className="text-xs sm:text-sm text-[#93A4C3] max-w-2xl mt-2 font-normal">
+          <p
+            className={`text-xs sm:text-sm max-w-2xl mt-2 font-normal ${
+              isDark ? "text-[#93A4C3]" : "text-slate-600"
+            }`}
+          >
             Turn heterogeneous consumer hardware into a coordinated inference mesh.
           </p>
         </div>
@@ -132,70 +157,134 @@ export default function Section04MeshCluster() {
           {/* LEFT COLUMN: AEROMESH MESH STATUS PANEL (Col span 3) */}
           {/* ==================================================== */}
           <div className="lg:col-span-3 flex flex-col justify-start">
-            <div className="w-full rounded-xl border border-cyan-500/40 bg-[#0B1528]/85 backdrop-blur-xl p-5 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.7),0_0_20px_rgba(34,211,238,0.08)] flex flex-col">
+            <div
+              className={`w-full rounded-xl border backdrop-blur-xl p-5 flex flex-col ${
+                isDark
+                  ? "border-cyan-500/40 bg-[#0B1528]/85 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.7),0_0_20px_rgba(34,211,238,0.08)] text-white"
+                  : "border-cyan-500/30 bg-white/95 shadow-xl text-slate-900"
+              }`}
+            >
               {/* Card Title */}
-              <div className="text-xs font-mono font-bold text-cyan-400 tracking-wider uppercase pb-3 border-b border-cyan-500/20">
+              <div
+                className={`text-xs font-mono font-bold tracking-wider uppercase pb-3 border-b ${
+                  isDark
+                    ? "text-cyan-400 border-cyan-500/20"
+                    : "text-sky-700 border-cyan-500/20"
+                }`}
+              >
                 AEROMESH MESH
               </div>
 
               {/* Metric Rows */}
-              <div className="flex flex-col divide-y divide-cyan-500/15">
+              <div
+                className={`flex flex-col divide-y ${
+                  isDark ? "divide-cyan-500/15" : "divide-slate-200"
+                }`}
+              >
                 {/* Row 1: NODES */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     NODES
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.nodes}
                   </span>
                 </div>
 
                 {/* Row 2: ACTIVE */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     ACTIVE
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.active}
                   </span>
                 </div>
 
                 {/* Row 3: DIRECT LINKS */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     DIRECT LINKS
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.directLinks}
                   </span>
                 </div>
 
                 {/* Row 4: AVG RTT */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     AVG RTT
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300 tabular-nums">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold tabular-nums ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.avgRtt} ms
                   </span>
                 </div>
 
                 {/* Row 5: WEIGHT TRANSFER */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     WEIGHT TRANSFER
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.weightTransfer}
                   </span>
                 </div>
 
                 {/* Row 6: TOKENS / SEC */}
                 <div className="flex items-center justify-between py-3">
-                  <span className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  <span
+                    className={`text-xs font-mono uppercase tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
                     TOKENS / SEC
                   </span>
-                  <span className="text-sm sm:text-base font-mono font-bold text-cyan-300 tabular-nums">
+                  <span
+                    className={`text-sm sm:text-base font-mono font-bold tabular-nums ${
+                      isDark ? "text-cyan-300" : "text-sky-600"
+                    }`}
+                  >
                     {metrics.tokensSec}
                   </span>
                 </div>
@@ -413,34 +502,52 @@ export default function Section04MeshCluster() {
               {/* CENTRAL COORDINATOR NODE */}
               {/* -------------------------------------------------- */}
               <div
-                className="absolute z-20 w-[145px] sm:w-[155px] h-[85px] sm:h-[90px] rounded-xl border border-cyan-400 bg-[#0B1528] shadow-[0_0_25px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.12)] flex flex-col items-center justify-center p-2 text-center transition-all duration-300 hover:shadow-[0_0_35px_rgba(34,211,238,0.5)]"
+                className={`absolute z-20 w-[145px] sm:w-[155px] h-[85px] sm:h-[90px] rounded-xl border flex flex-col items-center justify-center p-2 text-center transition-all duration-300 ${
+                  isDark
+                    ? "border-cyan-400 bg-[#0B1528] shadow-[0_0_25px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.12)] hover:shadow-[0_0_35px_rgba(34,211,238,0.5)]"
+                    : "border-cyan-500/60 bg-white shadow-lg hover:shadow-xl text-slate-900"
+                }`}
                 style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
               >
                 {/* Server blade rack icon with 3 horizontal bays + LED dots */}
                 <div className="mb-1.5 flex items-center justify-center">
-                  <div className="w-6 h-5 rounded border border-cyan-400/80 bg-cyan-950/60 p-0.5 flex flex-col justify-between">
+                  <div
+                    className={`w-6 h-5 rounded border p-0.5 flex flex-col justify-between ${
+                      isDark
+                        ? "border-cyan-400/80 bg-cyan-950/60"
+                        : "border-sky-400 bg-sky-50"
+                    }`}
+                  >
                     <div className="flex items-center justify-between px-0.5">
-                      <span className="w-3 h-[1px] bg-cyan-300" />
+                      <span className={`w-3 h-[1px] ${isDark ? "bg-cyan-300" : "bg-sky-600"}`} />
                       <span className="w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_4px_#22D3EE]" />
                     </div>
                     <div className="flex items-center justify-between px-0.5">
-                      <span className="w-3 h-[1px] bg-cyan-300" />
+                      <span className={`w-3 h-[1px] ${isDark ? "bg-cyan-300" : "bg-sky-600"}`} />
                       <span className="w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_4px_#22D3EE]" />
                     </div>
                     <div className="flex items-center justify-between px-0.5">
-                      <span className="w-3 h-[1px] bg-cyan-300" />
+                      <span className={`w-3 h-[1px] ${isDark ? "bg-cyan-300" : "bg-sky-600"}`} />
                       <span className="w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_4px_#22D3EE]" />
                     </div>
                   </div>
                 </div>
 
                 {/* Coordinator Title */}
-                <span className="text-[11px] sm:text-xs font-mono font-bold text-white tracking-wider uppercase">
+                <span
+                  className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}
+                >
                   COORDINATOR
                 </span>
 
                 {/* Coordinator Layers */}
-                <span className="text-[10px] sm:text-[11px] font-mono text-cyan-300 font-semibold mt-0.5">
+                <span
+                  className={`text-[10px] sm:text-[11px] font-mono font-semibold mt-0.5 ${
+                    isDark ? "text-cyan-300" : "text-sky-700"
+                  }`}
+                >
                   Layer 0 - 24
                 </span>
               </div>
@@ -449,7 +556,11 @@ export default function Section04MeshCluster() {
               {/* NODE 01 (TOP LEFT) */}
               {/* -------------------------------------------------- */}
               <div
-                className="absolute z-20 w-[130px] sm:w-[145px] rounded-xl border border-cyan-500/40 bg-[#0B1528]/95 backdrop-blur-md p-3 shadow-[0_0_15px_rgba(34,211,238,0.12)] flex flex-col gap-1 transition-all duration-200 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+                className={`absolute z-20 w-[130px] sm:w-[145px] rounded-xl border backdrop-blur-md p-3 flex flex-col gap-1 transition-all duration-200 ${
+                  isDark
+                    ? "border-cyan-500/40 bg-[#0B1528]/95 shadow-[0_0_15px_rgba(34,211,238,0.12)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] text-white"
+                    : "border-cyan-500/40 bg-white/95 shadow-md hover:border-cyan-500 text-slate-900"
+                }`}
                 style={{ left: "2%", top: "4%" }}
               >
                 {/* Header: Status check & Node title */}
@@ -457,23 +568,39 @@ export default function Section04MeshCluster() {
                   <span className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34D399]" />
                   </span>
-                  <span className="text-[11px] font-mono font-bold text-white tracking-wider">
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     NODE 01
                   </span>
                 </div>
 
                 {/* GPU Info */}
-                <div className="text-[11px] font-mono text-slate-200 font-medium mt-1">
+                <div
+                  className={`text-[11px] font-mono font-medium mt-1 ${
+                    isDark ? "text-slate-200" : "text-slate-700"
+                  }`}
+                >
                   RTX 3090
                 </div>
-                <div className="text-[10px] font-mono text-slate-400 font-normal">
+                <div
+                  className={`text-[10px] font-mono font-normal ${
+                    isDark ? "text-slate-400" : "text-slate-500"
+                  }`}
+                >
                   24 GB
                 </div>
 
                 {/* Status Row */}
-                <div className="flex items-center justify-between pt-1 mt-1 border-t border-white/5">
-                  <Monitor className="w-3 h-3 text-cyan-400" />
-                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                <div
+                  className={`flex items-center justify-between pt-1 mt-1 border-t ${
+                    isDark ? "border-white/5" : "border-slate-200"
+                  }`}
+                >
+                  <Monitor className={`w-3 h-3 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
+                  <span className="text-[10px] font-mono font-bold text-emerald-500 uppercase tracking-wider">
                     ONLINE
                   </span>
                 </div>
@@ -483,7 +610,11 @@ export default function Section04MeshCluster() {
               {/* NODE 02 (TOP RIGHT) */}
               {/* -------------------------------------------------- */}
               <div
-                className="absolute z-20 w-[130px] sm:w-[145px] rounded-xl border border-cyan-500/40 bg-[#0B1528]/95 backdrop-blur-md p-3 shadow-[0_0_15px_rgba(34,211,238,0.12)] flex flex-col gap-1 transition-all duration-200 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+                className={`absolute z-20 w-[130px] sm:w-[145px] rounded-xl border backdrop-blur-md p-3 flex flex-col gap-1 transition-all duration-200 ${
+                  isDark
+                    ? "border-cyan-500/40 bg-[#0B1528]/95 shadow-[0_0_15px_rgba(34,211,238,0.12)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] text-white"
+                    : "border-cyan-500/40 bg-white/95 shadow-md hover:border-cyan-500 text-slate-900"
+                }`}
                 style={{ right: "2%", top: "4%" }}
               >
                 {/* Header: Status check & Node title */}
@@ -491,23 +622,39 @@ export default function Section04MeshCluster() {
                   <span className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34D399]" />
                   </span>
-                  <span className="text-[11px] font-mono font-bold text-white tracking-wider">
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     NODE 02
                   </span>
                 </div>
 
                 {/* GPU Info */}
-                <div className="text-[11px] font-mono text-slate-200 font-medium mt-1">
+                <div
+                  className={`text-[11px] font-mono font-medium mt-1 ${
+                    isDark ? "text-slate-200" : "text-slate-700"
+                  }`}
+                >
                   RTX 4060
                 </div>
-                <div className="text-[10px] font-mono text-slate-400 font-normal">
+                <div
+                  className={`text-[10px] font-mono font-normal ${
+                    isDark ? "text-slate-400" : "text-slate-500"
+                  }`}
+                >
                   12 GB
                 </div>
 
                 {/* Status Row */}
-                <div className="flex items-center justify-between pt-1 mt-1 border-t border-white/5">
-                  <Monitor className="w-3 h-3 text-cyan-400" />
-                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                <div
+                  className={`flex items-center justify-between pt-1 mt-1 border-t ${
+                    isDark ? "border-white/5" : "border-slate-200"
+                  }`}
+                >
+                  <Monitor className={`w-3 h-3 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
+                  <span className="text-[10px] font-mono font-bold text-emerald-500 uppercase tracking-wider">
                     ONLINE
                   </span>
                 </div>
@@ -517,7 +664,11 @@ export default function Section04MeshCluster() {
               {/* NODE 03 (BOTTOM LEFT) */}
               {/* -------------------------------------------------- */}
               <div
-                className="absolute z-20 w-[130px] sm:w-[145px] rounded-xl border border-cyan-500/40 bg-[#0B1528]/95 backdrop-blur-md p-3 shadow-[0_0_15px_rgba(34,211,238,0.12)] flex flex-col gap-1 transition-all duration-200 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+                className={`absolute z-20 w-[130px] sm:w-[145px] rounded-xl border backdrop-blur-md p-3 flex flex-col gap-1 transition-all duration-200 ${
+                  isDark
+                    ? "border-cyan-500/40 bg-[#0B1528]/95 shadow-[0_0_15px_rgba(34,211,238,0.12)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] text-white"
+                    : "border-cyan-500/40 bg-white/95 shadow-md hover:border-cyan-500 text-slate-900"
+                }`}
                 style={{ left: "2%", bottom: "4%" }}
               >
                 {/* Header: Status check & Node title */}
@@ -525,23 +676,39 @@ export default function Section04MeshCluster() {
                   <span className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34D399]" />
                   </span>
-                  <span className="text-[11px] font-mono font-bold text-white tracking-wider">
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     NODE 03
                   </span>
                 </div>
 
                 {/* GPU Info */}
-                <div className="text-[11px] font-mono text-slate-200 font-medium mt-1">
+                <div
+                  className={`text-[11px] font-mono font-medium mt-1 ${
+                    isDark ? "text-slate-200" : "text-slate-700"
+                  }`}
+                >
                   RTX 3060
                 </div>
-                <div className="text-[10px] font-mono text-slate-400 font-normal">
+                <div
+                  className={`text-[10px] font-mono font-normal ${
+                    isDark ? "text-slate-400" : "text-slate-500"
+                  }`}
+                >
                   12 GB
                 </div>
 
                 {/* Status Row */}
-                <div className="flex items-center justify-between pt-1 mt-1 border-t border-white/5">
-                  <Monitor className="w-3 h-3 text-cyan-400" />
-                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                <div
+                  className={`flex items-center justify-between pt-1 mt-1 border-t ${
+                    isDark ? "border-white/5" : "border-slate-200"
+                  }`}
+                >
+                  <Monitor className={`w-3 h-3 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
+                  <span className="text-[10px] font-mono font-bold text-emerald-500 uppercase tracking-wider">
                     ONLINE
                   </span>
                 </div>
@@ -551,7 +718,11 @@ export default function Section04MeshCluster() {
               {/* NODE 04 (BOTTOM RIGHT - STANDBY) */}
               {/* -------------------------------------------------- */}
               <div
-                className="absolute z-20 w-[130px] sm:w-[145px] rounded-xl border border-rose-500/30 bg-[#140D1B]/90 backdrop-blur-md p-3 opacity-80 flex flex-col gap-1 transition-all duration-200 hover:opacity-100"
+                className={`absolute z-20 w-[130px] sm:w-[145px] rounded-xl border backdrop-blur-md p-3 opacity-80 flex flex-col gap-1 transition-all duration-200 hover:opacity-100 ${
+                  isDark
+                    ? "border-rose-500/30 bg-[#140D1B]/90 text-white"
+                    : "border-rose-300 bg-rose-50/90 text-slate-900 shadow-xs"
+                }`}
                 style={{ right: "2%", bottom: "4%" }}
               >
                 {/* Header: Status check & Node title */}
@@ -559,23 +730,39 @@ export default function Section04MeshCluster() {
                   <span className="w-3.5 h-3.5 rounded-full bg-rose-500/20 border border-rose-400/60 flex items-center justify-center shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
                   </span>
-                  <span className="text-[11px] font-mono font-bold text-slate-300 tracking-wider">
+                  <span
+                    className={`text-[11px] font-mono font-bold tracking-wider ${
+                      isDark ? "text-slate-300" : "text-slate-700"
+                    }`}
+                  >
                     NODE 04
                   </span>
                 </div>
 
                 {/* Standby Placeholder */}
-                <div className="text-[11px] font-mono text-slate-500 font-medium mt-1">
+                <div
+                  className={`text-[11px] font-mono font-medium mt-1 ${
+                    isDark ? "text-slate-500" : "text-slate-400"
+                  }`}
+                >
                   --
                 </div>
-                <div className="text-[10px] font-mono text-slate-600 font-normal">
+                <div
+                  className={`text-[10px] font-mono font-normal ${
+                    isDark ? "text-slate-600" : "text-slate-400"
+                  }`}
+                >
                   --
                 </div>
 
                 {/* Status Row */}
-                <div className="flex items-center justify-between pt-1 mt-1 border-t border-white/5">
+                <div
+                  className={`flex items-center justify-between pt-1 mt-1 border-t ${
+                    isDark ? "border-white/5" : "border-slate-200"
+                  }`}
+                >
                   <Monitor className="w-3 h-3 text-rose-400/60" />
-                  <span className="text-[10px] font-mono font-bold text-rose-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-rose-500 uppercase tracking-wider">
                     STANDBY
                   </span>
                 </div>
@@ -586,22 +773,34 @@ export default function Section04MeshCluster() {
           {/* ==================================================== */}
           {/* RIGHT COLUMN: SCALE YOUR INFERENCE (Col span 3) */}
           {/* ==================================================== */}
-          <div className="lg:col-span-3 flex flex-col justify-between lg:pl-6 lg:border-l lg:border-cyan-500/30 pt-6 lg:pt-0 border-t border-cyan-500/20 lg:border-t-0">
+          <div
+            className={`lg:col-span-3 flex flex-col justify-between lg:pl-6 lg:border-l pt-6 lg:pt-0 border-t lg:border-t-0 ${
+              isDark ? "lg:border-cyan-500/30 border-cyan-500/20" : "lg:border-slate-200 border-slate-200"
+            }`}
+          >
             <div>
               {/* Eyebrow with crosshair */}
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-cyan-400 font-mono text-xs font-bold tracking-wider">
+                <span
+                  className={`font-mono text-xs font-bold tracking-wider ${
+                    isDark ? "text-cyan-400" : "text-sky-600"
+                  }`}
+                >
                   +--
                 </span>
-                <span className="text-xs font-mono font-bold tracking-[0.2em] text-cyan-300 uppercase">
+                <span
+                  className={`text-xs font-mono font-bold tracking-[0.2em] uppercase ${
+                    isDark ? "text-cyan-300" : "text-sky-700"
+                  }`}
+                >
                   SCALE YOUR INFERENCE
                 </span>
               </div>
 
               {/* Large Stacked Heading */}
               <div className="font-sans font-black tracking-tight leading-[1.05] text-3xl sm:text-4xl uppercase mb-8">
-                <div className="text-white">MANY</div>
-                <div className="text-white">MACHINES.</div>
+                <div className={isDark ? "text-white" : "text-slate-900"}>MANY</div>
+                <div className={isDark ? "text-white" : "text-slate-900"}>MACHINES.</div>
                 <div className="text-cyan-400 text-cyan-glow">ONE</div>
                 <div className="text-cyan-400 text-cyan-glow">INFERENCE</div>
                 <div className="text-cyan-400 text-cyan-glow">ENGINE.</div>
@@ -611,45 +810,99 @@ export default function Section04MeshCluster() {
             {/* Capability Rows */}
             <div className="flex flex-col gap-4">
               {/* Item 1 */}
-              <div className="group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 hover:bg-cyan-950/20">
-                <div className="w-10 h-10 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Share2 className="w-5 h-5 text-cyan-400" />
+              <div
+                className={`group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 ${
+                  isDark ? "hover:bg-cyan-950/20" : "hover:bg-sky-50"
+                }`}
+              >
+                <div
+                  className={`w-10 h-10 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Share2 className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     WORKS WITH
                   </span>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wide">
+                  <span
+                    className={`text-[11px] font-mono uppercase tracking-wide ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     CONSUMER GPUS
                   </span>
                 </div>
               </div>
 
               {/* Item 2 */}
-              <div className="group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 hover:bg-cyan-950/20">
-                <div className="w-10 h-10 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Monitor className="w-5 h-5 text-cyan-400" />
+              <div
+                className={`group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 ${
+                  isDark ? "hover:bg-cyan-950/20" : "hover:bg-sky-50"
+                }`}
+              >
+                <div
+                  className={`w-10 h-10 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Monitor className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     HETEROGENEOUS
                   </span>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wide">
+                  <span
+                    className={`text-[11px] font-mono uppercase tracking-wide ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     HARDWARE SUPPORT
                   </span>
                 </div>
               </div>
 
               {/* Item 3 */}
-              <div className="group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 hover:bg-cyan-950/20">
-                <div className="w-10 h-10 rounded-lg border border-cyan-400/50 bg-[#0B1528] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Boxes className="w-5 h-5 text-cyan-400" />
+              <div
+                className={`group flex items-center gap-3.5 p-2 rounded-lg transition-colors duration-200 ${
+                  isDark ? "hover:bg-cyan-950/20" : "hover:bg-sky-50"
+                }`}
+              >
+                <div
+                  className={`w-10 h-10 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+                    isDark
+                      ? "border-cyan-400/50 bg-[#0B1528] shadow-[0_0_10px_rgba(34,211,238,0.15)] group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                      : "border-slate-300 bg-white shadow-xs group-hover:border-sky-400 group-hover:shadow-sm"
+                  }`}
+                >
+                  <Boxes className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-sky-600"}`} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xs font-mono font-bold text-white tracking-wider uppercase">
+                  <span
+                    className={`text-xs font-mono font-bold tracking-wider uppercase ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     COORDINATED
                   </span>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wide">
+                  <span
+                    className={`text-[11px] font-mono uppercase tracking-wide ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-medium"
+                    }`}
+                  >
                     DISTRIBUTED INFERENCE
                   </span>
                 </div>

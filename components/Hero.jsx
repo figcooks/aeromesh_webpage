@@ -36,8 +36,8 @@ export default function Hero() {
 
       {/* Main Grid Container for Content & Future 3D Model */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-5rem)]">
-        {/* Left: 42–48% Desktop Width (Moves upward & fades away smoothly on scroll) */}
-        <motion.div style={{ opacity: contentOpacity, y: contentY }} className="w-full lg:w-[48%]">
+        {/* Left: 42–45% Desktop Width (Moves upward & fades away smoothly on scroll) */}
+        <motion.div style={{ opacity: contentOpacity, y: contentY }} className="w-full lg:w-[45%] xl:w-[44%] shrink-0">
           <HeroContent />
         </motion.div>
 

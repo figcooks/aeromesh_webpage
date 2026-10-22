@@ -7,7 +7,26 @@ export default function CTAButtons() {
   const isDark = theme === "dark";
 
   return (
-    <div className="flex items-center gap-4 pt-2 sm:pt-4">
+    <div className="flex flex-wrap items-center gap-3.5 pt-2 sm:pt-4">
+      {/* Get Early Access Primary Button */}
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent('open-aeromesh-modal'))}
+        className="group btn-dark-blue-cyan inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-extrabold text-base tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] cursor-pointer"
+      >
+        <span className="text-cyan-outline font-black tracking-wider uppercase">
+          Get Early Access
+        </span>
+        <svg
+          className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 filter drop-shadow-[0_0_6px_rgba(34,211,238,0.7)]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#22D3EE"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </button>
+
       {/* View on GitHub */}
       <a
         href="https://github.com/tex1ure/AeroMESH"

@@ -4,6 +4,8 @@
   :root {
     --background: #060B14;
     --foreground: #F8FAFC;
+    --bg-primary: #060B14;
+    --text-primary: #F8FAFC;
     --cyan-glow: rgba(34, 211, 238, 0.4);
     --blue-glow: rgba(56, 189, 248, 0.3);
   }
@@ -11,16 +13,50 @@
   html.light {
     --background: #F8FAFC;
     --foreground: #0F172A;
+    --bg-primary: #F8FAFC;
+    --text-primary: #0F172A;
   }
 
-  * {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  html,
+  body,
+  button,
+  input,
+  optgroup,
+  select,
+  textarea,
+  a,
+  span,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  div,
+  label {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  }
+
+  .font-mono,
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-feature-settings: "tnum" 1, "zero" 1;
   }
 
   html,
   body {
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     scroll-behavior: smooth;
     user-select: text;
@@ -276,4 +312,78 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* ----------------------------------------------------
+   TYPOGRAPHY & GLASS UTILITIES
+   ---------------------------------------------------- */
+.font-display,
+.font-sans,
+.font-mono {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* ----------------------------------------------------
+   INVISIBLE FILL BUTTON WITH CYAN OUTLINE
+   Transparent background with glowing cyan border and outline text
+   ---------------------------------------------------- */
+.btn-dark-blue-cyan,
+.btn-cyan-ghost {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(34, 211, 238, 0.6) !important;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.2), inset 0 0 14px rgba(34, 211, 238, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.btn-dark-blue-cyan:hover,
+.btn-cyan-ghost:hover {
+  background-color: rgba(34, 211, 238, 0.08) !important;
+  background: rgba(34, 211, 238, 0.08) !important;
+  border-color: rgba(34, 211, 238, 0.95) !important;
+  box-shadow: 0 0 32px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.15);
+}
+
+.text-cyan-outline {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.2px #22D3EE;
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.45);
+}
+
+.text-cyan-outline-sm {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 0.9px #22D3EE;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.35);
+}
+
 

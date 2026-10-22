@@ -13,7 +13,7 @@ import Lenis from "lenis";
  * - Automatically respects prefers-reduced-motion
  * - Zero CPU overhead when idle
  */
-export default function SmoothScroll() {
+export default function SmoothScroll({ children }) {
   useEffect(() => {
     // Check user's reduced-motion preference
     const prefersReducedMotion = window.matchMedia(
@@ -67,5 +67,5 @@ export default function SmoothScroll() {
     };
   }, []);
 
-  return null;
+  return children || null;
 }

@@ -10,11 +10,10 @@ export default function Navbar() {
   const isDark = theme === "dark";
 
   const navLinks = [
-    { name: "Home", href: "#", active: true },
-    { name: "About", href: "#about", active: false },
+    { name: "Overview", href: "#overview", active: true },
     { name: "Architecture", href: "#architecture", active: false },
-    { name: "Features", href: "#features", active: false },
-    { name: "Docs", href: "#docs", active: false },
+    { name: "Selective Mesh", href: "#selective-mesh", active: false },
+    { name: "Benchmarks", href: "#benchmarks", active: false },
   ];
 
   return (
@@ -29,7 +28,7 @@ export default function Navbar() {
         {/* Left: Plain text logo ONLY */}
         <div className="flex-shrink-0">
           <a
-            href="#"
+            href="#overview"
             className={`text-lg sm:text-xl font-bold tracking-[0.24em] uppercase transition-colors ${
               isDark
                 ? "text-white hover:text-cyan-300"
@@ -75,7 +74,18 @@ export default function Navbar() {
         </nav>
 
         {/* Right: Theme Toggle & Bordered CTA Button */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
+          {/* Early Access Modal Trigger */}
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('open-aeromesh-modal'))}
+            className="btn-dark-blue-cyan px-4 py-2 rounded-full font-bold text-xs tracking-wider uppercase transition-all cursor-pointer"
+          >
+            <span className="text-cyan-outline-sm font-black tracking-wider uppercase">
+              Early Access
+            </span>
+          </button>
+
           {/* Theme Toggle Button */}
           <button
             type="button"

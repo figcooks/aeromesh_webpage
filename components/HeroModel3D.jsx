@@ -287,13 +287,14 @@ export default function HeroModel3D() {
 
     // 10. Animation Loop
     let animId;
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
       if (!isVisible) return; // Completely pauses WebGL execution when user scrolls away to Core Features!
 
-      const elapsedTime = clock.getElapsedTime();
+      timer.update();
+      const elapsedTime = timer.getElapsed();
       const currentDark = themeRef.current;
 
       // Dynamically adjust ambient lighting when theme changes
@@ -342,6 +343,7 @@ export default function HeroModel3D() {
     // 10. Cleanup
     return () => {
       cancelAnimationFrame(animId);
+      timer.dispose();
       observer.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pointermove", handlePointerMove);

@@ -7,25 +7,10 @@ export default function CTAButtons() {
   const isDark = theme === "dark";
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-2 sm:pt-4">
-      {/* Primary: Get Started */}
+    <div className="flex items-center gap-4 pt-2 sm:pt-4">
+      {/* View on GitHub */}
       <a
-        href="#get-started"
-        className={`group relative inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-semibold text-base tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer text-center ${
-          isDark
-            ? "bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 hover:shadow-[0_0_35px_rgba(34,211,238,0.55)] focus:ring-cyan-300 focus:ring-offset-[#060B14] glow-cyan-button"
-            : "bg-gradient-to-r from-sky-500 to-cyan-600 text-white shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/40 focus:ring-sky-500 focus:ring-offset-white"
-        }`}
-      >
-        <span>Get Started</span>
-        <span className="transition-transform duration-200 group-hover:translate-x-1">
-          →
-        </span>
-      </a>
-
-      {/* Secondary: View on GitHub */}
-      <a
-        href="https://github.com"
+        href="https://github.com/tex1ure/AeroMESH"
         target="_blank"
         rel="noopener noreferrer"
         className={`group inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-medium text-base tracking-wide backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 cursor-pointer text-center ${

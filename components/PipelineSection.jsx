@@ -33,7 +33,7 @@ export default function PipelineSection() {
       id="pipeline-section"
       className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
         isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
-      } transition-colors duration-300 flex flex-col items-center justify-center select-none`}
+      } transition-colors duration-300 flex flex-col items-center justify-center`}
       aria-label="The Inference Pipeline Architecture"
     >
       {/* Subtle Ambient Background */}

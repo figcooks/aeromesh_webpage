@@ -471,7 +471,7 @@ export default function HeroBackground() {
 
   return (
     <div
-      className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0"
+      className="absolute inset-0 pointer-events-none overflow-hidden z-0"
       aria-hidden="true"
     >
       {/* Soft Ambient Radial Lights (Curated Cyan & Indigo Glows) */}

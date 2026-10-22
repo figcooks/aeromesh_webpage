@@ -19,7 +19,7 @@ function MainContent() {
     <main
       className={`relative min-h-screen ${
         isDark ? "bg-[#060B14] text-slate-100" : "bg-[#F8FAFC] text-slate-900"
-      } flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300`}
+      } flex flex-col transition-colors duration-300`}
     >
       {/* Butter-Smooth Inertial Scrolling across whole page (Lenis) */}
       <SmoothScroll />

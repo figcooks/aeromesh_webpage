@@ -31,7 +31,7 @@ export default function Section05ModelStaysHome() {
       id="section-05-privacy"
       className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
         isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
-      } transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden`}
+      } transition-colors duration-300 flex flex-col items-center justify-center overflow-hidden`}
       aria-label="Section 05: The Model Stays Home"
     >
       {/* Background Technical Grid and Ambient Perspective Floor */}

@@ -48,8 +48,7 @@ export default function Hero() {
       {/* Subtle Technical Label in Lower-Right (Fades out smoothly on scroll) */}
       <motion.div
         style={{ opacity: badgeOpacity }}
-        className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-9 lg:right-12 z-20 hidden sm:flex items-center gap-3.5 select-none pointer-events-none"
-        aria-hidden="true"
+        className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-9 lg:right-12 z-20 hidden sm:flex items-center gap-3.5"
       >
         <div className="flex flex-col text-right">
           <span

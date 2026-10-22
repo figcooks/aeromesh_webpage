@@ -117,7 +117,7 @@ export default function CursorLight({ fixed = false, className = "" }) {
       ref={spotlightRef}
       className={`cursor-spotlight-layer ${
         fixed ? "fixed inset-0 z-[30]" : "absolute inset-0 z-[5]"
-      } pointer-events-none select-none ${
+      } pointer-events-none ${
         isDark ? "spotlight-dark" : "spotlight-light"
       } ${className}`}
       aria-hidden="true"

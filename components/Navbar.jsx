@@ -30,7 +30,7 @@ export default function Navbar() {
         <div className="flex-shrink-0">
           <a
             href="#"
-            className={`text-lg sm:text-xl font-bold tracking-[0.24em] uppercase transition-colors select-none ${
+            className={`text-lg sm:text-xl font-bold tracking-[0.24em] uppercase transition-colors ${
               isDark
                 ? "text-white hover:text-cyan-300"
                 : "text-slate-900 hover:text-sky-600"

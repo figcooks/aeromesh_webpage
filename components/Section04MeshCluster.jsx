@@ -48,7 +48,7 @@ export default function Section04MeshCluster() {
       id="section-04-cluster"
       className={`relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 ${
         isDark ? "bg-[#060B14] text-white" : "bg-[#F8FAFC] text-slate-900"
-      } transition-colors duration-300 flex flex-col items-center justify-center select-none overflow-hidden`}
+      } transition-colors duration-300 flex flex-col items-center justify-center overflow-hidden`}
       aria-label="Section 04: One System. Many Nodes."
     >
       {/* Background Technical Grid and Ambient Perspective Floor */}
@@ -296,7 +296,7 @@ export default function Section04MeshCluster() {
           {/* CENTER: DISTRIBUTED NODE TOPOLOGY (Col span 6) */}
           {/* ==================================================== */}
           <div className="lg:col-span-6 flex items-center justify-center relative min-h-[380px] sm:min-h-[420px] w-full">
-            <div className="relative w-full max-w-[560px] h-[380px] sm:h-[400px] flex items-center justify-center select-none">
+            <div className="relative w-full max-w-[560px] h-[380px] sm:h-[400px] flex items-center justify-center">
               {/* SVG Curved Connections & Traveling Packets Overlay */}
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none z-10"

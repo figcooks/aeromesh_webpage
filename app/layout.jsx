@@ -37,7 +37,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
-      <body className="bg-[#060B14] text-slate-100 min-h-screen antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="bg-[#060B14] text-slate-100 min-h-screen antialiased">
         {children}
       </body>
     </html>

@@ -375,7 +375,7 @@ export default function HeroModel3D() {
     <div
       ref={containerRef}
       id="aeromesh-hero-3d-model"
-      className="relative w-full lg:w-[55%] xl:w-[56%] h-[520px] sm:h-[600px] lg:h-[700px] xl:h-[740px] flex items-center justify-center select-none overflow-visible pointer-events-none z-10 -mt-4 sm:-mt-8 lg:-mt-10 mb-4 lg:mb-0 lg:translate-x-6 xl:translate-x-8"
+      className="relative w-full lg:w-[55%] xl:w-[56%] h-[520px] sm:h-[600px] lg:h-[700px] xl:h-[740px] flex items-center justify-center overflow-visible pointer-events-none z-10 -mt-4 sm:-mt-8 lg:-mt-10 mb-4 lg:mb-0 lg:translate-x-6 xl:translate-x-8"
       aria-label="AeroMESH 3D Rotating Laptop Cluster"
     >
       {/* Inner motion container animated strictly on GPU compositor */}

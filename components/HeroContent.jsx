@@ -10,7 +10,7 @@ export default function HeroContent() {
   return (
     <div className="relative z-20 flex flex-col justify-center max-w-2xl lg:max-w-[580px] xl:max-w-[650px] text-left py-6 lg:py-0">
       {/* Eyebrow with sleek technical corner accent */}
-      <div className="inline-flex items-center gap-3.5 mb-5 md:mb-6 select-none">
+      <div className="inline-flex items-center gap-3.5 mb-5 md:mb-6">
         <div className={`flex items-center ${isDark ? "text-cyan-400/80" : "text-sky-600"}`}>
           <span
             className={`w-5 h-[1.5px] inline-block ${

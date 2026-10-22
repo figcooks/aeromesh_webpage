@@ -179,26 +179,43 @@ export default function HeroBackground() {
         : `rgba(3, 105, 161, ${0.85 * alpha})`;
       ctx.stroke();
 
-      // Center bright node core
+      // Center bright node core (GPU-accelerated dual-circle glow without expensive shadowBlur)
       if (!isMirror) {
+        // Outer soft glow halo
+        ctx.beginPath();
+        ctx.arc(0, -h * 0.1, s * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = isThemeDark
+          ? `rgba(34, 211, 238, ${0.28 * alpha})`
+          : `rgba(14, 165, 233, ${0.22 * alpha})`;
+        ctx.fill();
+
+        // Inner crisp core
         ctx.beginPath();
         ctx.arc(0, -h * 0.1, s * 0.2, 0, Math.PI * 2);
         ctx.fillStyle = isThemeDark
-          ? `rgba(255, 255, 255, ${0.9 * alpha})`
-          : `rgba(14, 165, 233, ${0.9 * alpha})`;
-        ctx.shadowColor = isThemeDark
-          ? "rgba(34, 211, 238, 0.95)"
-          : "rgba(2, 132, 199, 0.75)";
-        ctx.shadowBlur = 14;
+          ? `rgba(255, 255, 255, ${0.92 * alpha})`
+          : `rgba(14, 165, 233, ${0.92 * alpha})`;
         ctx.fill();
       }
 
       ctx.restore();
     };
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     let time = 0;
 
     const render = () => {
+      animationFrameId = requestAnimationFrame(render);
+      if (!isVisible) return;
+
       time += 0.016;
       const currentDark = themeRef.current;
 
@@ -303,31 +320,30 @@ export default function HeroBackground() {
         }
 
         const lineGlow = stream.opacity * (0.85 + Math.sin(time * 2.2 + stream.id) * 0.15);
-        if (currentDark) {
-          const colorPrefix =
-            stream.id % 4 === 0
-              ? "rgba(56, 189, 248, "
-              : stream.id % 4 === 1
-              ? "rgba(34, 211, 238, "
-              : stream.id % 4 === 2
-              ? "rgba(14, 165, 233, "
-              : "rgba(99, 102, 241, ";
-          ctx.strokeStyle = `${colorPrefix}${lineGlow})`;
-          ctx.shadowColor = "rgba(34, 211, 238, 0.5)";
-        } else {
-          const colorPrefix =
-            stream.id % 4 === 0
-              ? "rgba(2, 132, 199, "
-              : stream.id % 4 === 1
-              ? "rgba(14, 165, 233, "
-              : stream.id % 4 === 2
-              ? "rgba(3, 105, 161, "
-              : "rgba(79, 70, 229, ";
-          ctx.strokeStyle = `${colorPrefix}${lineGlow * 1.1})`;
-          ctx.shadowColor = "rgba(14, 165, 233, 0.4)";
-        }
+        const colorPrefix = currentDark
+          ? stream.id % 4 === 0
+            ? "rgba(56, 189, 248, "
+            : stream.id % 4 === 1
+            ? "rgba(34, 211, 238, "
+            : stream.id % 4 === 2
+            ? "rgba(14, 165, 233, "
+            : "rgba(99, 102, 241, "
+          : stream.id % 4 === 0
+          ? "rgba(2, 132, 199, "
+          : stream.id % 4 === 1
+          ? "rgba(14, 165, 233, "
+          : stream.id % 4 === 2
+          ? "rgba(3, 105, 161, "
+          : "rgba(79, 70, 229, ";
+
+        // GPU-accelerated neon stream glow: soft outer stroke
+        ctx.strokeStyle = `${colorPrefix}${lineGlow * 0.25})`;
+        ctx.lineWidth = stream.lineWidth + 2.5;
+        ctx.stroke();
+
+        // Crisp inner stream stroke
+        ctx.strokeStyle = `${colorPrefix}${lineGlow * (currentDark ? 1 : 1.1)})`;
         ctx.lineWidth = stream.lineWidth;
-        ctx.shadowBlur = stream.id === 7 ? 16 : 8;
         ctx.stroke();
         ctx.restore();
 
@@ -346,15 +362,20 @@ export default function HeroBackground() {
               drawIsoCube(pt.x, pt.y, packet.size * 2, packetAlpha, time * 3 + stream.id, false, currentDark);
             } else {
               ctx.save();
+              // Outer glow halo
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, packet.size * 2, 0, Math.PI * 2);
+              ctx.fillStyle = currentDark
+                ? `rgba(34, 211, 238, ${packetAlpha * 0.35})`
+                : `rgba(14, 165, 233, ${packetAlpha * 0.3})`;
+              ctx.fill();
+
+              // Inner bright core
               ctx.beginPath();
               ctx.arc(pt.x, pt.y, packet.size, 0, Math.PI * 2);
               ctx.fillStyle = currentDark
                 ? `rgba(255, 255, 255, ${packetAlpha})`
                 : `rgba(2, 132, 199, ${packetAlpha})`;
-              ctx.shadowColor = currentDark
-                ? "rgba(34, 211, 238, 0.95)"
-                : "rgba(14, 165, 233, 0.85)";
-              ctx.shadowBlur = 12;
               ctx.fill();
               ctx.restore();
             }
@@ -382,12 +403,17 @@ export default function HeroBackground() {
           ctx.lineWidth = 1;
           ctx.stroke();
 
+          // Outer halo
+          ctx.beginPath();
+          ctx.arc(x, groundY, 6, 0, Math.PI * 2);
+          ctx.fillStyle = currentDark ? "rgba(34, 211, 238, 0.3)" : "rgba(14, 165, 233, 0.25)";
+          ctx.fill();
+
+          // Inner dot
           ctx.beginPath();
           ctx.setLineDash([]);
           ctx.arc(x, groundY, 3, 0, Math.PI * 2);
-          ctx.fillStyle = currentDark ? "rgba(56, 189, 248, 0.9)" : "rgba(2, 132, 199, 0.9)";
-          ctx.shadowColor = currentDark ? "rgba(34, 211, 238, 0.9)" : "rgba(14, 165, 233, 0.8)";
-          ctx.shadowBlur = 8;
+          ctx.fillStyle = currentDark ? "rgba(56, 189, 248, 0.95)" : "rgba(2, 132, 199, 0.95)";
           ctx.fill();
 
           const mirrorY = groundY + (groundY - y) * 0.25;
@@ -414,26 +440,30 @@ export default function HeroBackground() {
         const py = p.y * height + pY * p.depth * 0.25;
 
         ctx.save();
+        // Subtle outer glow halo
+        ctx.beginPath();
+        ctx.arc(px, py, p.radius * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = currentDark
+          ? `rgba(34, 211, 238, ${p.alpha * 0.22})`
+          : `rgba(14, 165, 233, ${p.alpha * 0.2})`;
+        ctx.fill();
+
+        // Inner particle core
         ctx.beginPath();
         ctx.arc(px, py, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = currentDark
-          ? `rgba(186, 230, 253, ${p.alpha * 0.65})`
-          : `rgba(2, 132, 199, ${p.alpha * 0.55})`;
-        ctx.shadowColor = currentDark
-          ? "rgba(34, 211, 238, 0.55)"
-          : "rgba(14, 165, 233, 0.5)";
-        ctx.shadowBlur = 6;
+          ? `rgba(186, 230, 253, ${p.alpha * 0.75})`
+          : `rgba(2, 132, 199, ${p.alpha * 0.65})`;
         ctx.fill();
         ctx.restore();
       });
-
-      animationFrameId = requestAnimationFrame(render);
     };
 
     render();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };

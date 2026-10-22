@@ -43,12 +43,41 @@ export default function CursorLight({ fixed = false, className = "" }) {
     let animationFrameId;
 
     // Smooth fluid interpolation factor (lerp)
-    const LERP_SPEED = 0.14;
+    const LERP_SPEED = 0.18;
+    let isRunning = false;
+
+    const animate = () => {
+      const dx = targetX - currentX;
+      const dy = targetY - currentY;
+
+      if (Math.abs(dx) > 0.15 || Math.abs(dy) > 0.15) {
+        currentX += dx * LERP_SPEED;
+        currentY += dy * LERP_SPEED;
+        el.style.setProperty("--mouse-x", `${currentX.toFixed(1)}px`);
+        el.style.setProperty("--mouse-y", `${currentY.toFixed(1)}px`);
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        isRunning = false;
+      }
+    };
+
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
 
     const handlePointerMove = (e) => {
-      const rect = el.getBoundingClientRect();
-      targetX = e.clientX - rect.left;
-      targetY = e.clientY - rect.top;
+      // For fixed overlay, clientX/Y are exact without forced DOM layout reads
+      if (fixed) {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      } else {
+        const rect = el.getBoundingClientRect();
+        targetX = e.clientX - rect.left;
+        targetY = e.clientY - rect.top;
+      }
 
       if (!isInside) {
         isInside = true;
@@ -58,6 +87,8 @@ export default function CursorLight({ fixed = false, className = "" }) {
           currentY = targetY;
         }
       }
+
+      requestTick();
     };
 
     const handlePointerLeave = () => {
@@ -73,22 +104,8 @@ export default function CursorLight({ fixed = false, className = "" }) {
     document.documentElement.addEventListener("pointerleave", handlePointerLeave, { passive: true });
     document.documentElement.addEventListener("pointerenter", handlePointerEnter, { passive: true });
 
-    const animate = () => {
-      if (isInside || Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
-        currentX += (targetX - currentX) * LERP_SPEED;
-        currentY += (targetY - currentY) * LERP_SPEED;
-
-        el.style.setProperty("--mouse-x", `${currentX.toFixed(1)}px`);
-        el.style.setProperty("--mouse-y", `${currentY.toFixed(1)}px`);
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       window.removeEventListener("pointermove", handlePointerMove);
       document.documentElement.removeEventListener("pointerleave", handlePointerLeave);
       document.documentElement.removeEventListener("pointerenter", handlePointerEnter);

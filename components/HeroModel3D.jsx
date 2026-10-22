@@ -262,7 +262,17 @@ export default function HeroModel3D() {
       }
     );
 
-    // 8. Mouse Parallax Tracking
+    // 8. Viewport Intersection Observer (pause WebGL render loop when scrolled offscreen)
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    if (container) observer.observe(container);
+
+    // 9. Mouse Parallax Tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetMouseX = 0;
@@ -275,12 +285,13 @@ export default function HeroModel3D() {
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
-    // 9. Animation Loop
+    // 10. Animation Loop
     let animId;
     const clock = new THREE.Clock();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
+      if (!isVisible) return; // Completely pauses WebGL execution when user scrolls away to Core Features!
 
       const elapsedTime = clock.getElapsedTime();
       const currentDark = themeRef.current;
@@ -331,6 +342,7 @@ export default function HeroModel3D() {
     // 10. Cleanup
     return () => {
       cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pointermove", handlePointerMove);
 
@@ -357,89 +369,96 @@ export default function HeroModel3D() {
   }, []);
 
   return (
-    <motion.div
+    /* Static outer container that preserves layout metrics without thrashing useScroll */
+    <div
       ref={containerRef}
       id="aeromesh-hero-3d-model"
-      style={{
-        y: scrollY,
-        scale: scrollScale,
-        opacity: scrollOpacity,
-      }}
-      initial={{ opacity: 0, y: 35, scale: 0.94 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
       className="relative w-full lg:w-[55%] xl:w-[56%] h-[520px] sm:h-[600px] lg:h-[700px] xl:h-[740px] flex items-center justify-center select-none overflow-visible pointer-events-none z-10 -mt-4 sm:-mt-8 lg:-mt-10 mb-4 lg:mb-0 lg:translate-x-6 xl:translate-x-8"
       aria-label="AeroMESH 3D Rotating Laptop Cluster"
     >
-      {/* 1. Concentrated Core Blue Glow behind the 3 rotating laptops */}
-      <div
-        className="absolute top-[48%] left-[54%] -translate-x-1/2 -translate-y-1/2 w-[420px] sm:w-[540px] h-[420px] sm:h-[540px] rounded-full blur-[80px] pointer-events-none z-0 transition-opacity duration-300"
+      {/* Inner motion container animated strictly on GPU compositor */}
+      <motion.div
         style={{
-          background: isDark
-            ? "radial-gradient(circle, rgba(14,165,233,0.38) 0%, rgba(37,99,235,0.25) 35%, rgba(99,102,241,0.12) 65%, transparent 80%)"
-            : "radial-gradient(circle, rgba(14,165,233,0.22) 0%, rgba(56,189,248,0.12) 35%, rgba(99,102,241,0.06) 65%, transparent 80%)",
+          y: scrollY,
+          scale: scrollScale,
+          opacity: scrollOpacity,
+          willChange: "transform, opacity",
         }}
-      />
+        initial={{ opacity: 0, y: 35, scale: 0.94 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full h-full flex items-center justify-center pointer-events-none"
+      >
+        {/* 1. Concentrated Core Blue Glow behind the 3 rotating laptops */}
+        <div
+          className="absolute top-[48%] left-[54%] -translate-x-1/2 -translate-y-1/2 w-[420px] sm:w-[540px] h-[420px] sm:h-[540px] rounded-full blur-[80px] pointer-events-none z-0 transition-opacity duration-300"
+          style={{
+            background: isDark
+              ? "radial-gradient(circle, rgba(14,165,233,0.38) 0%, rgba(37,99,235,0.25) 35%, rgba(99,102,241,0.12) 65%, transparent 80%)"
+              : "radial-gradient(circle, rgba(14,165,233,0.22) 0%, rgba(56,189,248,0.12) 35%, rgba(99,102,241,0.06) 65%, transparent 80%)",
+          }}
+        />
 
-      {/* 2. Expansive Pulsing Ambient Blue Halo */}
-      <div
-        className="absolute top-[48%] left-[54%] -translate-x-1/2 -translate-y-1/2 w-[560px] sm:w-[720px] h-[560px] sm:h-[720px] rounded-full blur-[130px] pointer-events-none z-0 animate-pulse transition-opacity duration-300"
-        style={{
-          background: isDark
-            ? "radial-gradient(circle, rgba(34,211,238,0.22) 0%, rgba(56,189,248,0.15) 40%, transparent 75%)"
-            : "radial-gradient(circle, rgba(56,189,248,0.14) 0%, rgba(14,165,233,0.08) 40%, transparent 75%)",
-        }}
-      />
+        {/* 2. Expansive Pulsing Ambient Blue Halo */}
+        <div
+          className="absolute top-[48%] left-[54%] -translate-x-1/2 -translate-y-1/2 w-[560px] sm:w-[720px] h-[560px] sm:h-[720px] rounded-full blur-[130px] pointer-events-none z-0 animate-pulse transition-opacity duration-300"
+          style={{
+            background: isDark
+              ? "radial-gradient(circle, rgba(34,211,238,0.22) 0%, rgba(56,189,248,0.15) 40%, transparent 75%)"
+              : "radial-gradient(circle, rgba(56,189,248,0.14) 0%, rgba(14,165,233,0.08) 40%, transparent 75%)",
+          }}
+        />
 
-      {/* 3. Under-Cluster Floor Glow Halo */}
-      <div
-        className="absolute bottom-8 sm:bottom-12 left-[54%] -translate-x-1/2 w-[380px] sm:w-[520px] h-[70px] rounded-full pointer-events-none z-0 blur-[25px] transition-opacity duration-300"
-        style={{
-          background: isDark
-            ? "radial-gradient(ellipse at center, rgba(34,211,238,0.35) 0%, rgba(37,99,235,0.2) 45%, transparent 75%)"
-            : "radial-gradient(ellipse at center, rgba(34,211,238,0.18) 0%, rgba(14,165,233,0.1) 45%, transparent 75%)",
-        }}
-      />
+        {/* 3. Under-Cluster Floor Glow Halo */}
+        <div
+          className="absolute bottom-8 sm:bottom-12 left-[54%] -translate-x-1/2 w-[380px] sm:w-[520px] h-[70px] rounded-full pointer-events-none z-0 blur-[25px] transition-opacity duration-300"
+          style={{
+            background: isDark
+              ? "radial-gradient(ellipse at center, rgba(34,211,238,0.35) 0%, rgba(37,99,235,0.2) 45%, transparent 75%)"
+              : "radial-gradient(ellipse at center, rgba(34,211,238,0.18) 0%, rgba(14,165,233,0.1) 45%, transparent 75%)",
+          }}
+        />
 
-      {/* 4. Soft Contact Floor Shadow */}
-      <div
-        className="absolute bottom-6 sm:bottom-10 left-[54%] -translate-x-1/2 w-[340px] sm:w-[480px] h-[55px] rounded-full pointer-events-none z-0 transition-opacity duration-300"
-        style={{
-          background: isDark
-            ? "radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(14,165,233,0.15) 45%, transparent 75%)"
-            : "radial-gradient(ellipse at center, rgba(100,116,139,0.18) 0%, rgba(14,165,233,0.06) 45%, transparent 75%)",
-        }}
-      />
+        {/* 4. Soft Contact Floor Shadow */}
+        <div
+          className="absolute bottom-6 sm:bottom-10 left-[54%] -translate-x-1/2 w-[340px] sm:w-[480px] h-[55px] rounded-full pointer-events-none z-0 transition-opacity duration-300"
+          style={{
+            background: isDark
+              ? "radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(14,165,233,0.15) 45%, transparent 75%)"
+              : "radial-gradient(ellipse at center, rgba(100,116,139,0.18) 0%, rgba(14,165,233,0.06) 45%, transparent 75%)",
+          }}
+        />
 
-      {/* 5. Three.js Transparent Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="relative z-10 w-full h-full block pointer-events-none"
-      />
+        {/* 5. Three.js Transparent Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="relative z-10 w-full h-full block pointer-events-none"
+        />
 
-      {/* 6. Minimal HUD Loading State */}
-      {loading && (
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none">
-          <div className="w-12 h-12 rounded-full border border-cyan-500/40 border-t-cyan-300 animate-spin flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-            <div className="w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_8px_#22D3EE]" />
-          </div>
-          <div
-            className={`mt-3 px-3 py-1 rounded-full border backdrop-blur-md ${
-              isDark
-                ? "border-cyan-500/30 bg-cyan-950/60"
-                : "border-sky-300 bg-white/80"
-            }`}
-          >
-            <span
-              className={`text-[10px] font-mono tracking-[0.2em] uppercase font-semibold ${
-                isDark ? "text-cyan-300" : "text-sky-700"
+        {/* 6. Minimal HUD Loading State */}
+        {loading && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none">
+            <div className="w-12 h-12 rounded-full border border-cyan-500/40 border-t-cyan-300 animate-spin flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+              <div className="w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_8px_#22D3EE]" />
+            </div>
+            <div
+              className={`mt-3 px-3 py-1 rounded-full border backdrop-blur-md ${
+                isDark
+                  ? "border-cyan-500/30 bg-cyan-950/60"
+                  : "border-sky-300 bg-white/80"
               }`}
             >
-              INITIALIZING LAPTOP MESH {loadProgress > 0 ? `· ${loadProgress}%` : ""}
-            </span>
+              <span
+                className={`text-[10px] font-mono tracking-[0.2em] uppercase font-semibold ${
+                  isDark ? "text-cyan-300" : "text-sky-700"
+                }`}
+              >
+                INITIALIZING LAPTOP MESH {loadProgress > 0 ? `· ${loadProgress}%` : ""}
+              </span>
+            </div>
           </div>
-        </div>
-      )}
-    </motion.div>
+        )}
+      </motion.div>
+    </div>
   );
 }

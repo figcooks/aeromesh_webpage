@@ -8,6 +8,7 @@ import PipelineSection from "../components/PipelineSection";
 import Section04MeshCluster from "../components/Section04MeshCluster";
 import Section05ModelStaysHome from "../components/Section05ModelStaysHome";
 import CursorLight from "../components/CursorLight";
+import SmoothScroll from "../components/SmoothScroll";
 import { ThemeProvider, useTheme } from "../components/ThemeContext";
 
 function MainContent() {
@@ -20,6 +21,9 @@ function MainContent() {
         isDark ? "bg-[#060B14] text-slate-100" : "bg-[#F8FAFC] text-slate-900"
       } flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300`}
     >
+      {/* Butter-Smooth Inertial Scrolling across whole page (Lenis) */}
+      <SmoothScroll />
+
       {/* Interactive Dual-Mode Page-Wide Cursor Spotlight (fixed across all sections) */}
       <CursorLight fixed />
 

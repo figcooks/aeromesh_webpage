@@ -38,6 +38,80 @@
   }
 }
 
+/* ====================================================
+   FUTURISTIC TRANSLUCENT OVERLAY SCROLLBAR
+   Eliminates white Windows scrollbar gutters and arrows.
+   Blends seamlessly with dark (#060B14) and light backgrounds.
+   ==================================================== */
+
+/* WebKit / Chromium / Edge / Opera / Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* Dark Mode Scrollbar Thumb: Sleek translucent pill floating over background */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.28);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(34, 211, 238, 0.55);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(34, 211, 238, 0.85);
+}
+
+/* Light Mode Scrollbar Thumb: Soft slate pill with sky-blue hover */
+html.light ::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.35);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(14, 165, 233, 0.65);
+}
+
+html.light ::-webkit-scrollbar-thumb:active {
+  background-color: rgba(14, 165, 233, 0.9);
+}
+
+/* Firefox standard scrollbar (only applied when ::-webkit-scrollbar is unsupported) */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+  }
+
+  html.light,
+  html.light * {
+    scrollbar-color: rgba(100, 116, 139, 0.35) transparent;
+  }
+}
+
 /* Subtle futuristic scan lines */
 .bg-scanlines {
   background: linear-gradient(
@@ -165,3 +239,28 @@ html:not(.dark) .cursor-spotlight-layer {
     display: none !important;
   }
 }
+
+/* ----------------------------------------------------
+   LENIS SMOOTH SCROLLING STYLES
+   ---------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 export default function Preloader({
   videoSrc = '/preloader.mp4',
@@ -101,14 +102,24 @@ export default function Preloader({
 
       {/* Subtle Top Branding */}
       <div className="relative z-10 flex items-center justify-between px-6 sm:px-10 pt-6 sm:pt-8">
-        <div className="flex items-center gap-2.5">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-          <span className="text-xs tracking-[0.22em] uppercase font-bold text-slate-400">
+        <div className="flex items-center gap-3">
+          <div className="relative w-6 h-6 flex items-center justify-center drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
+            <Image
+              src="/logo.png"
+              alt="AeroMESH Logo"
+              width={24}
+              height={24}
+              className="w-full h-full object-contain"
+              priority
+            />
+          </div>
+          <span className="text-xs tracking-[0.22em] uppercase font-bold text-slate-300">
             Aero<span className="text-cyan-400 font-extrabold">MESH</span>
           </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse ml-1" />
         </div>
 
-        <span className="text-[11px] uppercase tracking-widest text-slate-500 font-semibold">
+        <span className="text-[11px] uppercase tracking-widest text-slate-500 font-semibold font-mono">
           v0.4.2
         </span>
       </div>

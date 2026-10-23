@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTheme } from "./ThemeContext";
 
 export default function Navbar() {
@@ -25,17 +26,31 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
-        {/* Left: Plain text logo ONLY */}
+        {/* Left: Brand Logo & Wordmark */}
         <div className="flex-shrink-0">
           <a
             href="#overview"
-            className={`text-lg sm:text-xl font-bold tracking-[0.24em] uppercase transition-colors ${
-              isDark
-                ? "text-white hover:text-cyan-300"
-                : "text-slate-900 hover:text-sky-600"
-            }`}
+            className="group flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-[1.02]"
           >
-            AEROMESH
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.7)]">
+              <Image
+                src="/logo.png"
+                alt="AeroMESH Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+                priority
+              />
+            </div>
+            <span
+              className={`text-lg sm:text-xl font-bold tracking-[0.24em] uppercase transition-colors ${
+                isDark
+                  ? "text-white group-hover:text-cyan-300"
+                  : "text-slate-900 group-hover:text-sky-600"
+              }`}
+            >
+              AEROMESH
+            </span>
           </a>
         </div>
 

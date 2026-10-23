@@ -580,25 +580,49 @@ export default function Section07Benchmarks() {
 
             {/* Live Pooled Output Panel */}
             <div
-              className="lg:col-span-5 p-6 rounded-xl border flex flex-col justify-between space-y-5"
-              style={{
-                background: isDark ? "rgba(6, 11, 20, 0.85)" : "#0F172A",
-                borderColor: "rgba(34, 211, 238, 0.3)",
-              }}
+              className={`lg:col-span-5 p-6 rounded-xl border flex flex-col justify-between space-y-5 transition-colors duration-200 ${
+                isDark
+                  ? "bg-[#060B14]/85 border-cyan-500/30 shadow-[0_0_25px_rgba(0,0,0,0.5)]"
+                  : "bg-gradient-to-br from-slate-50 via-sky-50/40 to-slate-100 border-sky-300/60 shadow-sm"
+              }`}
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="font-mono text-[11px] uppercase tracking-wider text-slate-400">
+                  <div
+                    className={`font-mono text-[11px] uppercase tracking-wider ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-semibold"
+                    }`}
+                  >
                     Total Pooled Cluster Memory
                   </div>
-                  <div className="font-black text-3xl sm:text-4xl text-white mt-1">
+                  <div
+                    className={`font-black text-3xl sm:text-4xl mt-1 ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     {clusterStats.totalVram}{" "}
-                    <span className="text-base sm:text-lg font-mono text-cyan-400">GB VRAM</span>
+                    <span
+                      className={`text-base sm:text-lg font-mono ${
+                        isDark ? "text-cyan-400" : "text-sky-600 font-bold"
+                      }`}
+                    >
+                      GB VRAM
+                    </span>
                   </div>
                 </div>
                 <div className="text-right font-mono">
-                  <div className="text-[11px] text-slate-400 uppercase">Active Nodes</div>
-                  <div className="text-xl sm:text-2xl font-bold text-emerald-400">
+                  <div
+                    className={`text-[11px] uppercase ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-semibold"
+                    }`}
+                  >
+                    Active Nodes
+                  </div>
+                  <div
+                    className={`text-xl sm:text-2xl font-bold ${
+                      isDark ? "text-emerald-400" : "text-emerald-600"
+                    }`}
+                  >
                     {clusterStats.totalNodes} Nodes
                   </div>
                 </div>
@@ -606,11 +630,19 @@ export default function Section07Benchmarks() {
 
               {/* Dynamic Proportional Layer Split Bar */}
               <div>
-                <div className="flex items-center justify-between font-mono text-[11px] text-slate-400 mb-2">
+                <div
+                  className={`flex items-center justify-between font-mono text-[11px] mb-2 ${
+                    isDark ? "text-slate-400" : "text-slate-500 font-semibold"
+                  }`}
+                >
                   <span>DYNAMIC LAYER PARTITIONING</span>
                   <span>80 / 80 LAYERS</span>
                 </div>
-                <div className="w-full h-3 rounded-full overflow-hidden flex gap-1 bg-slate-800 p-0.5">
+                <div
+                  className={`w-full h-3 rounded-full overflow-hidden flex gap-1 p-0.5 ${
+                    isDark ? "bg-slate-800" : "bg-slate-200/90 border border-slate-300/40"
+                  }`}
+                >
                   {clusterStats.segments.map((seg) => (
                     <div
                       key={seg.id}
@@ -627,7 +659,9 @@ export default function Section07Benchmarks() {
                   {clusterStats.segments.map((seg) => (
                     <span
                       key={seg.id}
-                      className="inline-flex items-center gap-1.5 font-mono text-[10px] text-slate-300"
+                      className={`inline-flex items-center gap-1.5 font-mono text-[10px] ${
+                        isDark ? "text-slate-300" : "text-slate-600 font-medium"
+                      }`}
                     >
                       <span
                         className="w-2 h-2 rounded-full"
@@ -640,20 +674,52 @@ export default function Section07Benchmarks() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
-                <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                  <div className="font-mono text-[10px] text-slate-400 uppercase">
+              <div
+                className={`grid grid-cols-2 gap-3 pt-3 border-t ${
+                  isDark ? "border-white/10" : "border-slate-200/90"
+                }`}
+              >
+                <div
+                  className={`p-3 rounded-lg border ${
+                    isDark
+                      ? "bg-white/5 border-white/10"
+                      : "bg-white/90 border-slate-200/90 shadow-2xs"
+                  }`}
+                >
+                  <div
+                    className={`font-mono text-[10px] uppercase ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-semibold"
+                    }`}
+                  >
                     Unlocked Model Class
                   </div>
-                  <div className="font-semibold text-xs sm:text-sm text-cyan-300 mt-0.5 truncate">
+                  <div
+                    className={`font-semibold text-xs sm:text-sm mt-0.5 truncate ${
+                      isDark ? "text-cyan-300" : "text-sky-700 font-bold"
+                    }`}
+                  >
                     {clusterStats.maxModelLabel}
                   </div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                  <div className="font-mono text-[10px] text-slate-400 uppercase">
+                <div
+                  className={`p-3 rounded-lg border ${
+                    isDark
+                      ? "bg-white/5 border-white/10"
+                      : "bg-white/90 border-slate-200/90 shadow-2xs"
+                  }`}
+                >
+                  <div
+                    className={`font-mono text-[10px] uppercase ${
+                      isDark ? "text-slate-400" : "text-slate-500 font-semibold"
+                    }`}
+                  >
                     Est. Cluster Speed
                   </div>
-                  <div className="font-mono text-base sm:text-lg font-bold text-emerald-400 mt-0.5">
+                  <div
+                    className={`font-mono text-base sm:text-lg font-bold mt-0.5 ${
+                      isDark ? "text-emerald-400" : "text-emerald-600 font-black"
+                    }`}
+                  >
                     ~{clusterStats.speedAdjusted} tok/s
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export default function Home() {
 
       <SmoothScroll>
         <div
-          className="relative min-h-screen w-full selection:bg-sky-500/30 selection:text-sky-200 overflow-x-clip"
+          className="relative min-h-screen w-full overflow-x-clip"
           style={{ background: "var(--bg-primary)", color: "var(--text-primary)" }}
         >
           {/* Subtle Cursor Light Follow */}

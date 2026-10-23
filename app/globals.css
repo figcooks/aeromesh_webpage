@@ -75,16 +75,54 @@
     color: #0F172A;
   }
 
-  /* Curated Futuristic Text Selection Highlights */
-  ::selection {
-    background-color: rgba(34, 211, 238, 0.35);
-    color: #F8FAFC;
-  }
+}
 
-  html.light ::selection {
-    background-color: rgba(14, 165, 233, 0.28);
-    color: #0F172A;
-  }
+/* ====================================================
+   CURATED FUTURISTIC TEXT SELECTION HIGHLIGHTS
+   Crisp, high-contrast, theme-aware text selection
+   ==================================================== */
+::selection {
+  background-color: rgba(34, 211, 238, 0.35);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background-color: rgba(34, 211, 238, 0.35);
+  color: #FFFFFF;
+}
+
+/* Dark Mode: luminous cyan highlight with crisp white text */
+html.dark ::selection,
+html.dark::selection,
+[data-theme="dark"] ::selection,
+[data-theme="dark"]::selection {
+  background-color: rgba(34, 211, 238, 0.35);
+  color: #FFFFFF;
+}
+
+html.dark ::-moz-selection,
+html.dark::-moz-selection,
+[data-theme="dark"] ::-moz-selection,
+[data-theme="dark"]::-moz-selection {
+  background-color: rgba(34, 211, 238, 0.35);
+  color: #FFFFFF;
+}
+
+/* Light Mode: crystal sky highlight with deep readable slate text */
+html.light ::selection,
+html.light::selection,
+[data-theme="light"] ::selection,
+[data-theme="light"]::selection {
+  background-color: rgba(2, 132, 199, 0.22);
+  color: #0F172A;
+}
+
+html.light ::-moz-selection,
+html.light::-moz-selection,
+[data-theme="light"] ::-moz-selection,
+[data-theme="light"]::-moz-selection {
+  background-color: rgba(2, 132, 199, 0.22);
+  color: #0F172A;
 }
 
 /* ====================================================

@@ -1,14 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "./ThemeContext";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
   const isDark = theme === "dark";
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateScrollDir = () => {
+      const scrollY = window.scrollY;
+
+      // Keep navbar visible if mobile menu is open
+      if (mobileMenuOpen) {
+        setIsVisible(true);
+        ticking = false;
+        return;
+      }
+
+      // Always show navbar near the top of the page
+      if (scrollY < 80) {
+        setIsVisible(true);
+        lastScrollY = scrollY;
+        ticking = false;
+        return;
+      }
+
+      const diff = scrollY - lastScrollY;
+
+      // Minimum delta to prevent jitter on trackpad bounce
+      if (Math.abs(diff) > 8) {
+        if (diff > 0) {
+          // Scrolling DOWN -> slide up out of view
+          setIsVisible(false);
+        } else {
+          // Scrolling UP -> slide down into view
+          setIsVisible(true);
+        }
+        lastScrollY = scrollY;
+      }
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollDir);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: "Overview", href: "#overview", active: true },
@@ -19,7 +70,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out backdrop-blur-md will-change-transform ${
+        isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none shadow-none"
+      } ${
         isDark
           ? "bg-[#060B14]/80 border-b border-white/[0.05]"
           : "bg-white/85 border-b border-slate-200/80 shadow-xs"
